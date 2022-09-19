@@ -14,18 +14,21 @@ struct Collection: Identifiable {
     var id: String {
         name
     }
+}
 
-    static var sampleList: [Collection] {
+extension Collection {
+    static var kitchen: Collection {
         var kitchen = Collection(name: "Kitchen")
         kitchen.objects = [
             Object(name: "Sink"),
             Object(name: "Island")
         ]
-
+        return kitchen
+    }
+    static var sampleList: [Collection] {
         return [
             kitchen,
             Collection(name: "Part")
         ]
     }
 }
-

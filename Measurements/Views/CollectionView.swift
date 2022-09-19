@@ -24,6 +24,6 @@ struct CollectionView: View {
 
 struct CollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionView(collection: Collection.sampleList.first!)
+        CollectionView(collection: Collection.kitchen)
     }
 }
