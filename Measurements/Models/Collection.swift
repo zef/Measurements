@@ -21,8 +21,8 @@ extension Collection {
         var kitchen = Collection(name: "Kitchen")
         var sink = Object(name: "Sink")
         sink.measurements = [
-            Measurement(name: "Width", value: "36\""),
-            Measurement(value: "18\"")
+            Measurement(name: "Width", value: 36),
+            Measurement(value: 18)
         ]
 
         kitchen.objects = [

@@ -16,7 +16,7 @@ struct ObjectView: View {
         Section(object.name) {
             ForEach(object.measurements) { measurement in
                 HStack {
-                    Text(measurement.value)
+                    Text(measurement.displayValue)
                     Spacer()
                     if let name = measurement.name {
                         Text(name)
