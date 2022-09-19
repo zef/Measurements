@@ -11,11 +11,13 @@ struct CollectionView: View {
     var collection: Collection
 
     var body: some View {
-        Text(collection.name)
-            .font(.largeTitle)
+        VStack {
+            Text(collection.name)
+                .font(.largeTitle)
 
-        List(collection.objects) { object in
-            Text(object.name)
+            List(collection.objects) { object in
+                Text(object.name)
+            }
         }
     }
 }
