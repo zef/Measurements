@@ -1,11 +1,9 @@
-import UIKit
-
-var greeting = "Hello, playground"
+import Foundation
 
 let grams = UnitMass.grams
 let pounds = UnitMass.pounds
 
-//UnitMass(symbol: pounds.symbol)
+grams.symbol
 
 var measurement = Measurement(value: 1900, unit: grams)
 
