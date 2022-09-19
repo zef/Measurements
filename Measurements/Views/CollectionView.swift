@@ -16,7 +16,27 @@ struct CollectionView: View {
                 .font(.largeTitle)
 
             List(collection.objects) { object in
-                Text(object.name)
+                Section(object.name) {
+                    ForEach(object.measurements) { measurement in
+                        HStack {
+                            Text(measurement.value)
+                            Spacer()
+                            if let name = measurement.name {
+                                Text(name)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+
+                    HStack {
+                        Text("New Dimension")
+                        Spacer()
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.blue)
+                            .font(.system(size: 24))
+                    }
+                    .foregroundColor(.gray)
+                }
             }
         }
     }
