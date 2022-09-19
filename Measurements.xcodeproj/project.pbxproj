@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D67DDCD28D8FFFF0039C74F /* ObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D67DDCC28D8FFFF0039C74F /* ObjectView.swift */; };
 		8D7D762528CFC111009058FF /* MeasurementsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D762428CFC111009058FF /* MeasurementsApp.swift */; };
 		8D7D762928CFC112009058FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D762828CFC112009058FF /* Assets.xcassets */; };
 		8D7D762C28CFC112009058FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D762B28CFC112009058FF /* Preview Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D67DDCC28D8FFFF0039C74F /* ObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectView.swift; sourceTree = "<group>"; };
 		8D7D762128CFC111009058FF /* Measurements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Measurements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7D762428CFC111009058FF /* MeasurementsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsApp.swift; sourceTree = "<group>"; };
 		8D7D762828CFC112009058FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				8D7D765228CFC184009058FF /* CollectionsView.swift */,
 				8D7D765628CFC306009058FF /* CollectionView.swift */,
+				8D67DDCC28D8FFFF0039C74F /* ObjectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			files = (
 				8D7D765128CFC156009058FF /* Collection.swift in Sources */,
 				8D7D765728CFC306009058FF /* CollectionView.swift in Sources */,
+				8D67DDCD28D8FFFF0039C74F /* ObjectView.swift in Sources */,
 				8D7D765928CFC5A3009058FF /* Measurement.swift in Sources */,
 				8D7D765328CFC184009058FF /* CollectionsView.swift in Sources */,
 				8D7D765528CFC29B009058FF /* Object.swift in Sources */,
