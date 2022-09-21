@@ -8,6 +8,33 @@
 import Foundation
 
 struct Measurement: Identifiable {
+    enum UnitType: String, CaseIterable, Identifiable {
+        case length
+        case mass
+
+        var name: String {
+            rawValue
+        }
+        var id: String {
+            rawValue
+        }
+
+        func iconName(filled: Bool = true) -> String {
+            let name: String
+            switch self {
+            case .length:
+                name = "ruler"
+            case .mass:
+                name = "scalemass"
+            }
+            if filled {
+                return "\(name).fill"
+            } else {
+                return name
+            }
+        }
+    }
+
     enum Unit {
         case inch
         case millimeter

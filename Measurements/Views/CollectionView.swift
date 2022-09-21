@@ -16,7 +16,20 @@ struct CollectionView: View {
                 .font(.largeTitle)
 
             List(collection.objects) { object in
-                ObjectView(object: object)
+                NavigationLink(destination: ObjectView(object: object)) {
+                    Section(object.name) {
+                        ForEach(object.measurements) { measurement in
+                            HStack {
+                                Text(measurement.displayValue)
+                                Spacer()
+                                if let name = measurement.name {
+                                    Text(name)
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -13,18 +13,7 @@ struct ObjectView: View {
     @State var newDimensionValue: String = ""
 
     var body: some View {
-        Section(object.name) {
-            ForEach(object.measurements) { measurement in
-                HStack {
-                    Text(measurement.displayValue)
-                    Spacer()
-                    if let name = measurement.name {
-                        Text(name)
-                            .foregroundColor(.gray)
-                    }
-                }
-            }
-
+        VStack {
             HStack {
                 TextField("New Dimension", text: $newDimensionValue)
                 Spacer()
@@ -32,8 +21,19 @@ struct ObjectView: View {
                     .foregroundColor(.blue)
                     .font(.system(size: 24))
             }
-//            .foregroundColor(.gray)
+            .padding(20)
+
+            List(object.measurements) { measurement in
+                HStack {
+                    Text(measurement.displayValue)
+                    Spacer()
+                    if let name = measurement.name {
+                        Text(name)
+                    }
+                }
+            }
         }
+//            .foregroundColor(.gray)
     }
 }
 
