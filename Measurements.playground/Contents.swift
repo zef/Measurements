@@ -5,6 +5,7 @@ let pounds = UnitMass.pounds
 
 grams.symbol
 
+
 var measurement = Measurement(value: 1900, unit: grams)
 
 measurement + measurement
@@ -13,6 +14,8 @@ measurement.converted(to: pounds)
 measurement
 
 let feet = UnitLength.feet
+
+feet.symbol
 
 let width = Measurement(value: 14, unit: feet)
 let length = Measurement(value: 10, unit: feet)

@@ -8,28 +8,65 @@
 import SwiftUI
 
 struct UnitSelectionView: View {
+    @AppStorage(Settings.Key.lastUnitType.rawValue) var selectedUnitType: Measurement.UnitType = .mass
+
+    @State var selectedUnit = "in"
+//    var selectedUnitType: Measurement.UnitType {
+//        Settings.lastUnitType
+//    }
+
     var body: some View {
-        HStack(spacing: 28) {
-            ForEach(Measurement.UnitType.allCases) { type in
-                VStack {
-                    Label(type.name, systemImage: type.iconName())
-                        .labelStyle(VerticalLabelStyle())
+        VStack {
+            ScrollView(.horizontal) {
+                HStack(spacing: 4) {
+                    ForEach(Measurement.UnitType.allCases) { type in
+                        typeButton(type: type)
+                    }
+                }
+            }
+            Divider()
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(spacing: 4) {
+                    ForEach(selectedUnitType.dimensions) { unit in
+                        Button {
+                            selectedUnit = unit.symbol
+                        } label: {
+                            Text(unit.symbol)
+                                .font(.system(size: 26)).bold()
+                                .selectable(selectedUnit == unit.symbol)
+                        }
+                    }
                 }
             }
         }
     }
+
+    func typeButton(type: Measurement.UnitType) -> some View {
+        Button {
+            selectedUnitType = type
+            selectedUnit = type.dimensions.first?.symbol ?? ""
+        } label: {
+            VStack {
+                Image(systemName: type.iconName())
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                Text(type.name)
+                    .font(.system(size: 18)).bold()
+            }
+            .selectable(type == selectedUnitType)
+        }
+    }
 }
 
-struct VerticalLabelStyle: LabelStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        VStack() {
-            configuration.icon
-                .aspectRatio(contentMode: .fill)
-                .font(.system(size: 50))
-                .frame(width: 60, height: 60)
-
-            configuration.title
-        }
+extension View {
+    func selectable(_ isSelected: Bool) -> some View {
+        return self
+            .padding(.vertical, 16)
+            .padding(.horizontal, 22)
+            .foregroundColor(isSelected ? .accentColor : Color.text)
+            .background(isSelected ? Color.accentColor.opacity(0.24) : .clear)
+            .cornerRadius(22)
     }
 }
 
@@ -37,5 +74,6 @@ struct VerticalLabelStyle: LabelStyle {
 struct UnitSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         UnitSelectionView()
+            .padding(20)
     }
 }

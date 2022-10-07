@@ -16,6 +16,7 @@ struct ObjectView: View {
         VStack {
             HStack {
                 TextField("New Dimension", text: $newDimensionValue)
+                    .keyboardType(.decimalPad)
                 Spacer()
                 Image(systemName: "plus.circle")
                     .foregroundColor(.blue)
@@ -32,6 +33,8 @@ struct ObjectView: View {
                     }
                 }
             }
+            UnitSelectionView()
+                .padding(8)
         }
 //            .foregroundColor(.gray)
     }

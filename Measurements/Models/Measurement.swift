@@ -8,9 +8,11 @@
 import Foundation
 
 struct Measurement: Identifiable {
+
     enum UnitType: String, CaseIterable, Identifiable {
         case length
         case mass
+        case temperature = "temp"
 
         var name: String {
             rawValue
@@ -19,14 +21,33 @@ struct Measurement: Identifiable {
             rawValue
         }
 
+        var dimensions: [Foundation.Unit] {
+            specificUnitType.dimensions
+        }
+
+        var specificUnitType: any SpecificUnit.Type {
+            switch self {
+            case .length:
+                return UnitLength.self
+            case .mass:
+                return UnitMass.self
+            case .temperature:
+                return UnitTemperature.self
+            }
+        }
+
         func iconName(filled: Bool = true) -> String {
             let name: String
+
             switch self {
             case .length:
                 name = "ruler"
             case .mass:
                 name = "scalemass"
+            case .temperature:
+                return "thermometer"
             }
+
             if filled {
                 return "\(name).fill"
             } else {
@@ -35,32 +56,9 @@ struct Measurement: Identifiable {
         }
     }
 
-    enum Unit {
-        case inch
-        case millimeter
-
-        var unitType: UnitLength {
-            switch self {
-            case .inch:
-                return UnitLength.inches
-            case .millimeter:
-                return UnitLength.millimeters
-            }
-        }
-
-        var abbreviation: String {
-            switch self {
-            case .inch:
-                return "\""
-            default:
-                return unitType.symbol
-            }
-        }
-    }
-
     var name: String?
     var value: Double
-    var unit: Unit = .inch
+    var unit: UnitLength = .inches
 
     var displayValue: String {
         return "\(value)\(unit.abbreviation)"
