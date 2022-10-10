@@ -20,6 +20,10 @@ feet.symbol
 let width = Measurement(value: 14, unit: feet)
 let length = Measurement(value: 10, unit: feet)
 
+let formatter = MeasurementFormatter()
+
+formatter.string(from: measurement)
+
 
 //if let data = try? NSKeyedArchiver.archivedData(withRootObject: width, requiringSecureCoding: false) {
 //    data

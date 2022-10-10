@@ -8,7 +8,6 @@
 import Foundation
 
 struct Measurement: Identifiable {
-
     enum UnitType: String, CaseIterable, Identifiable {
         case length
         case mass
@@ -21,11 +20,11 @@ struct Measurement: Identifiable {
             rawValue
         }
 
-        var dimensions: [Foundation.Unit] {
-            specificUnitType.dimensions
+        var dimensions: [Dimension] {
+            type.dimensions
         }
 
-        var specificUnitType: any SpecificUnit.Type {
+        var type: any SpecificUnit.Type {
             switch self {
             case .length:
                 return UnitLength.self

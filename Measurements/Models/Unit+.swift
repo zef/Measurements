@@ -19,28 +19,22 @@ extension Unit: Identifiable {
     }
 }
 
-protocol SpecificUnit {
-    associatedtype Element: Dimension
-
-//    static var name: String { get }
+protocol SpecificUnit: Dimension, Identifiable {
+    associatedtype Element: SpecificUnit
 
     static var dimensions: [Element] { get }
     static var metricDimensions: [Element] { get }
     static var saeDimensions: [Element] { get }
 }
 
-//extension SpecificUnit: Identifiable {
-//    static var id
-//}
-
-//extension SpecificUnit {
-//    var isMetric: Bool {
-//        return Self.metricDimensions.contains(self)
-//    }
-//    var isSAE: Bool {
-//        return Self.saeDimensions.contains(self)
-//    }
-//}
+extension SpecificUnit {
+    var isMetric: Bool {
+        Self.metricDimensions.contains { $0 == self }
+    }
+    var isSAE: Bool {
+        Self.saeDimensions.contains { $0 == self }
+    }
+}
 
 extension UnitLength: SpecificUnit {
     static var dimensions: [UnitLength] {
@@ -100,6 +94,3 @@ extension UnitTemperature: SpecificUnit {
         [.fahrenheit]
     }
 }
-
-
-

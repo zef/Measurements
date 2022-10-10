@@ -18,6 +18,7 @@ struct CollectionsView: View {
                     Text(collection.name)
                 }
             }
+            .navigationTitle("Collections")
         }
     }
 }
