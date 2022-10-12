@@ -37,6 +37,7 @@ struct ObjectView: View {
                 .padding(8)
         }
 //            .foregroundColor(.gray)
+        .navigationTitle(object.name)
     }
 }
 

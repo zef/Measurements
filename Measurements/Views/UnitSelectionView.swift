@@ -34,6 +34,12 @@ struct UnitSelectionView: View {
                             Text(unit.symbol)
                                 .font(.system(size: 26)).bold()
                                 .selectable(selectedUnit == unit.symbol)
+//                                .overlay {
+//                                    RoundedRectangle(cornerRadius: 12)
+//                                        .stroke(Color.metric, lineWidth: 4)
+////                                        .stroke(unit.isMetric ? Color.metric : Color.sae, lineWidth: 4)
+//                                }
+//                                .padding(4)
                         }
                     }
                 }

@@ -11,22 +11,17 @@ struct CollectionView: View {
     var collection: Collection
 
     var body: some View {
-        VStack {
-            Text(collection.name)
-                .font(.largeTitle)
-
-            List(collection.objects) { object in
-                Section(object.name) {
-                    NavigationLink(destination: ObjectView(object: object)) {
-                        VStack(spacing: 10) {
-                            ForEach(object.measurements) { measurement in
-                                HStack {
-                                    Text(measurement.displayValue)
-                                    Spacer()
-                                    if let name = measurement.name {
-                                        Text(name)
-                                            .foregroundColor(.gray)
-                                    }
+        List(collection.objects) { object in
+            Section(object.name) {
+                NavigationLink(destination: ObjectView(object: object)) {
+                    VStack(spacing: 10) {
+                        ForEach(object.measurements) { measurement in
+                            HStack {
+                                Text(measurement.displayValue)
+                                Spacer()
+                                if let name = measurement.name {
+                                    Text(name)
+                                        .foregroundColor(.gray)
                                 }
                             }
                         }
@@ -34,6 +29,7 @@ struct CollectionView: View {
                 }
             }
         }
+        .navigationTitle(collection.name)
     }
 }
 
