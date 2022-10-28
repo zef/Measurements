@@ -30,7 +30,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //            let type = dimension.unitType
 //            print("\(String(describing: type))")
 //            print(String(describing: dimension))
-            print(dimension.unitTypeName)
+            let formatter = MeasurementFormatter()
+            formatter.unitStyle = .long
+            formatter.unitOptions = .providedUnit
+            let measurement = Foundation.Measurement(value: 12, unit: dimension)
+            let string = formatter.string(from: measurement)
+            print(string)
+//            print(dimension.unitTypeName)
         }
     }
 //

@@ -8,12 +8,20 @@
 import Foundation
 
 struct Measurement: Identifiable {
+    static var longFormatter: MeasurementFormatter = {
+        let formatter = MeasurementFormatter()
+        formatter.unitStyle = .long
+        formatter.unitOptions = .providedUnit
+        return formatter
+    }()
+
     var name: String?
     var value: Double
     var unit: Dimension = UnitLength.inches
 
     var displayValue: String {
-        return "\(value)\(unit.abbreviation)"
+        let measurement = Foundation.Measurement(value: value, unit: unit)
+        return Measurement.longFormatter.string(from: measurement)
     }
 
     var id: UUID {
