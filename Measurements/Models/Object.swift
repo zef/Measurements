@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct Object: Identifiable {
-    var name: String
-    var measurements = [Measurement]()
+class Object: Identifiable, ObservableObject {
+    @Published var name: String
+    @Published var measurements = [Measurement]()
+
+    init(name: String, measurements: [Measurement] = [Measurement]()) {
+        self.name = name
+        self.measurements = measurements
+    }
 
     var id: String {
         name

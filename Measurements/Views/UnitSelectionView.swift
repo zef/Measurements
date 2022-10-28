@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct UnitSelectionView: View {
-    @AppStorage(Settings.Key.lastUnitType.rawValue) var selectedUnitType: Measurement.UnitType = .mass
-
-    @State var selectedUnit = "in"
-//    var selectedUnitType: Measurement.UnitType {
-//        Settings.lastUnitType
-//    }
+    @Binding var selectedUnitType: UnitType
+    @Binding var selectedUnit: Dimension
 
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
                 HStack(spacing: 4) {
-                    ForEach(Measurement.UnitType.allCases) { type in
+                    ForEach(UnitType.allCases) { type in
                         typeButton(type: type)
                     }
                 }
@@ -29,11 +25,13 @@ struct UnitSelectionView: View {
                 HStack(spacing: 4) {
                     ForEach(selectedUnitType.dimensions) { unit in
                         Button {
-                            selectedUnit = unit.symbol
+                            if let unit = unit as? any SpecificUnit {
+                                selectedUnit = unit
+                            }
                         } label: {
                             Text(unit.symbol)
                                 .font(.system(size: 26)).bold()
-                                .selectable(selectedUnit == unit.symbol)
+                                .selectable(selectedUnit.id == unit.symbol)
 //                                .overlay {
 //                                    RoundedRectangle(cornerRadius: 12)
 //                                        .stroke(Color.metric, lineWidth: 4)
@@ -47,18 +45,18 @@ struct UnitSelectionView: View {
         }
     }
 
-    func typeButton(type: Measurement.UnitType) -> some View {
+    func typeButton(type: UnitType) -> some View {
         Button {
             selectedUnitType = type
-            selectedUnit = type.dimensions.first?.symbol ?? ""
+            selectedUnit = type.dimensions.first ?? UnitLength.inches
         } label: {
             VStack {
-                Image(systemName: type.iconName())
+                Image(systemName: type.iconName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                Text(type.name)
-                    .font(.system(size: 18)).bold()
+                    .frame(width: 34, height: 34)
+                Text(type.description)
+                    .font(.system(size: 14)).bold()
             }
             .selectable(type == selectedUnitType)
         }
@@ -78,8 +76,11 @@ extension View {
 
 
 struct UnitSelectionView_Previews: PreviewProvider {
+    @State static var selectedUnitType: UnitType = .mass
+    @State static var selectedUnit: Dimension = UnitLength.inches
+
     static var previews: some View {
-        UnitSelectionView()
+        UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)
             .padding(20)
     }
 }

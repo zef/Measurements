@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ObjectView: View {
-    var object: Object
-
+    @ObservedObject var object: Object
     @State var newDimensionValue: String = ""
+
+    @AppStorage(Settings.Key.lastUnitType.rawValue)
+    var selectedUnitType: UnitType = .mass
+    @State var selectedUnit: Dimension = UnitLength.inches
 
     var body: some View {
         VStack {
@@ -18,9 +21,13 @@ struct ObjectView: View {
                 TextField("New Dimension", text: $newDimensionValue)
                     .keyboardType(.decimalPad)
                 Spacer()
-                Image(systemName: "plus.circle")
-                    .foregroundColor(.blue)
-                    .font(.system(size: 24))
+                Button {
+                    createNewMeasurement()
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 28))
+                }
             }
             .padding(20)
 
@@ -33,11 +40,21 @@ struct ObjectView: View {
                     }
                 }
             }
-            UnitSelectionView()
+            UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)
                 .padding(8)
         }
 //            .foregroundColor(.gray)
         .navigationTitle(object.name)
+    }
+
+    func createNewMeasurement() {
+        guard let value = Double(newDimensionValue) else {
+            print("could not create measurement, value is not a Double")
+            return
+        }
+        let measurement = Measurement(value: value)
+        object.measurements.append(measurement)
+
     }
 }
 

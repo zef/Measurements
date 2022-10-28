@@ -9,9 +9,39 @@ import SwiftUI
 
 @main
 struct MeasurementsApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
             CollectionsView()
         }
     }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//        printCategories()
+        checkDimensions()
+        return true
+    }
+
+    func checkDimensions() {
+        for dimension in UnitType.allCases.flatMap(\.dimensions) {
+//            let type = dimension.unitType
+//            print("\(String(describing: type))")
+//            print(String(describing: dimension))
+            print(dimension.unitTypeName)
+        }
+    }
+//
+//    func printCategories() {
+//        for category in Category.allCases {
+//            print(category)
+//            for sub in category.subcategories {
+//                print("\(sub.rawValue): \(sub.unit.symbol)")
+//            }
+//
+//            print("")
+//        }
+//    }
 }
