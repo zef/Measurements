@@ -10,10 +10,12 @@ import SwiftUI
 @main
 struct MeasurementsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             CollectionsView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
