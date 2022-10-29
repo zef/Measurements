@@ -46,11 +46,15 @@ let s = "NSUnitInformationStorage"
 let new = s.replacing("NSUnit", with: "").replacing(/^[A-Z]{1}/) { $0.0.lowercased() }
 new
 
+UnitVolume.tablespoons.symbol
+String(describing: UnitVolume.tablespoons)
+String(describing: tbsp)
 
 
-//if let data = try? NSKeyedArchiver.archivedData(withRootObject: width, requiringSecureCoding: false) {
-//    data
-//    print(data)
+if let data = try? NSKeyedArchiver.archivedData(withRootObject: width, requiringSecureCoding: false) {
+    data
+    print(data)
+    print(String(data: data, encoding: .utf8))
 //    let newWidth = try? NSKeyedUnarchiver.unarchivedObject(ofClass: Measurement, from: data)
-//}
+}
 
