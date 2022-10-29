@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct CollectionView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     var collection: Collection
 
     var body: some View {
-        List(collection.objects) { object in
-            Section(object.name) {
-                NavigationLink(destination: ObjectView(object: object)) {
+        List(collection.itemList) { item in
+            Section(item.displayName) {
+                NavigationLink(destination: ItemView(item: item)) {
                     VStack(spacing: 10) {
-                        ForEach(object.measurements) { measurement in
+                        ForEach(item.measurementList) { measurement in
                             HStack {
                                 Text(measurement.displayValue)
                                 Spacer()
@@ -29,12 +31,55 @@ struct CollectionView: View {
                 }
             }
         }
-        .navigationTitle(collection.name)
+        .addButton(action: newItem, iconName: "plus")
+        .navigationTitle(collection.displayName)
     }
+
+
+    func newItem() {
+        let item = Item(context: viewContext)
+        collection.addToItems(item)
+        item.collection = collection
+        item.updateTimestamps()
+        item.name = Date().formatted(date: .long, time: .shortened)
+        print("Collection items: \(collection.itemList)")
+    }
+}
+
+extension View {
+    @ViewBuilder public func addButton(action: @escaping () -> Void, iconName: String) -> some View {
+        self.overlay(alignment: .bottomTrailing) {
+            Button(action: action) {
+                Image(systemName: iconName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .frame(width: 34, height: 34)
+            .padding(14)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(.orange, lineWidth: 4)
+            }
+            .padding(20)
+        }
+    }
+
 }
 
 struct CollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionView(collection: Collection.kitchen)
+        let preview = PersistenceController.preview
+
+        let collection = Collection(context: preview.container.viewContext)
+        collection.name = "House Stuff"
+
+        let item = Item(context: preview.container.viewContext)
+        item.name = "Door"
+//        item.value = 28
+
+        preview.save()
+//        let collection = Collection()
+        
+        return CollectionView(collection: collection)
     }
 }

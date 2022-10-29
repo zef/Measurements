@@ -1,5 +1,5 @@
 //
-//  ObjectView.swift
+//  ItemView.swift
 //  Measurements
 //
 //  Created by Zef Houssney on 9/19/22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ObjectView: View {
-    @ObservedObject var object: Object
+struct ItemView: View {
+    @ObservedObject var item: Item
     @State var newDimensionValue: String = ""
 
     @AppStorage(Settings.Key.lastUnitType.rawValue)
@@ -31,7 +31,7 @@ struct ObjectView: View {
             }
             .padding(20)
 
-            List(object.measurements) { measurement in
+            List(item.measurementList) { measurement in
                 HStack {
                     Text(measurement.displayValue)
                     Spacer()
@@ -44,7 +44,7 @@ struct ObjectView: View {
                 .padding(8)
         }
 //            .foregroundColor(.gray)
-        .navigationTitle(object.name)
+        .navigationTitle(item.displayName)
     }
 
     func createNewMeasurement() {
@@ -52,16 +52,17 @@ struct ObjectView: View {
             print("could not create measurement, value is not a Double")
             return
         }
-        let measurement = Measurement(value: value)
-        object.measurements.append(measurement)
-
+        print(value)
+//        let measurement = Measurement(value: value)
+//        item.measurements.append(measurement)
     }
 }
 
-struct ObjectView_Previews: PreviewProvider {
+struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        if let object = Collection.kitchen.objects.first {
-            ObjectView(object: object)
-        }
+        Text("todo")
+//        if let object = Collection.kitchen.objects.first {
+//            ItemView(object: object)
+//        }
     }
 }
