@@ -10,7 +10,7 @@ import SwiftUI
 struct CollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    var collection: Collection
+    @State var collection: Collection
 
     var body: some View {
         List(collection.itemList) { item in
@@ -33,6 +33,7 @@ struct CollectionView: View {
         }
         .addButton(action: newItem, iconName: "plus")
         .navigationTitle(collection.displayName)
+        .navigationBarTitleDisplayMode(.inline)
     }
 
 
@@ -42,7 +43,8 @@ struct CollectionView: View {
         item.collection = collection
         item.updateTimestamps()
         item.name = Date().formatted(date: .long, time: .shortened)
-        print("Collection items: \(collection.itemList)")
+//        print("Collection items: \(collection.itemList)")
+        DataController.shared.save()
     }
 }
 
@@ -68,7 +70,7 @@ extension View {
 
 struct CollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        let preview = PersistenceController.preview
+        let preview = DataController.preview
 
         let collection = Collection(context: preview.container.viewContext)
         collection.name = "House Stuff"

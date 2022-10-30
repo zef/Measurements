@@ -10,12 +10,13 @@ import SwiftUI
 @main
 struct MeasurementsApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let persistenceController = PersistenceController.shared
+
+    @StateObject private var dataController = DataController.shared
 
     var body: some Scene {
         WindowGroup {
             CollectionsView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

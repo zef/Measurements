@@ -9,7 +9,7 @@ import Foundation
 
 extension BaseEntity {
     var displayName: String {
-        name ?? ""
+        name ?? createdAt?.formatted(date: .numeric, time: .omitted) ?? ""
     }
 
     var sortDate: Date {

@@ -10,7 +10,7 @@
 		8D091202290CDE2800850332 /* MeasurementsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091201290CDE2800850332 /* MeasurementsApp.swift */; };
 		8D091206290CDE2900850332 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D091205290CDE2900850332 /* Assets.xcassets */; };
 		8D091209290CDE2900850332 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D091208290CDE2900850332 /* Preview Assets.xcassets */; };
-		8D09120B290CDE2900850332 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09120A290CDE2900850332 /* Persistence.swift */; };
+		8D09120B290CDE2900850332 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09120A290CDE2900850332 /* DataController.swift */; };
 		8D09120E290CDE2900850332 /* Measurements.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D09120C290CDE2900850332 /* Measurements.xcdatamodeld */; };
 		8D091219290CDE2A00850332 /* MeasurementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091218290CDE2A00850332 /* MeasurementsTests.swift */; };
 		8D091223290CDE2A00850332 /* MeasurementsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091222290CDE2A00850332 /* MeasurementsUITests.swift */; };
@@ -51,7 +51,7 @@
 		8D091203290CDE2800850332 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8D091205290CDE2900850332 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D091208290CDE2900850332 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8D09120A290CDE2900850332 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8D09120A290CDE2900850332 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		8D09120D290CDE2900850332 /* Measurements.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Measurements.xcdatamodel; sourceTree = "<group>"; };
 		8D09120F290CDE2900850332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D091214290CDE2A00850332 /* MeasurementsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeasurementsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +123,6 @@
 				8D091201290CDE2800850332 /* MeasurementsApp.swift */,
 				8D091203290CDE2800850332 /* ContentView.swift */,
 				8D091205290CDE2900850332 /* Assets.xcassets */,
-				8D09120A290CDE2900850332 /* Persistence.swift */,
 				8D091239290CDE7C00850332 /* Views */,
 				8D091231290CDE7C00850332 /* Models */,
 				8D09123E290CDE7C00850332 /* Utility */,
@@ -162,6 +161,7 @@
 		8D091231290CDE7C00850332 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D09120A290CDE2900850332 /* DataController.swift */,
 				8DE42A81290CE7C0002AE0EF /* Units */,
 				8D091232290CDE7C00850332 /* Models.swift */,
 				8D091237290CDE7C00850332 /* Settings.swift */,
@@ -174,8 +174,8 @@
 			children = (
 				8D09123A290CDE7C00850332 /* CollectionsView.swift */,
 				8D09123B290CDE7C00850332 /* CollectionView.swift */,
-				8D09123C290CDE7C00850332 /* UnitSelectionView.swift */,
 				8D09123D290CDE7C00850332 /* ItemView.swift */,
+				8D09123C290CDE7C00850332 /* UnitSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D09120B290CDE2900850332 /* Persistence.swift in Sources */,
+				8D09120B290CDE2900850332 /* DataController.swift in Sources */,
 				8D091241290CDE7C00850332 /* Models.swift in Sources */,
 				8D091248290CDE7C00850332 /* CollectionsView.swift in Sources */,
 				8D091245290CDE7C00850332 /* Dimension.swift in Sources */,
