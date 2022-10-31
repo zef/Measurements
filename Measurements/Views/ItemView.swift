@@ -36,7 +36,6 @@ struct ItemView: View {
         }
         .navigationTitle(item.displayName)
         .padding(8)
-
         .toolbar {
             ToolbarItem(placement: .principal) {
                 TextField("Item Name", text: Binding($item.name, ""), prompt: Text("Item Name"))
@@ -52,24 +51,18 @@ struct ItemView: View {
     }
 
     var newMeasurementForm: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Measurement Name").font(.system(.callout))
-                TextField("Measurement Name", text: $newMeasurementName, prompt: Text("Measurement Name"))
-            }
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Measurement Value").font(.system(.callout))
-                HStack {
-                    TextField("Measurement Value", text: $newMeasurementValue, prompt: Text("0.0"))
-                        .keyboardType(.decimalPad)
-                    Spacer()
-                    Button {
-                        createNewMeasurement()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .foregroundColor(.blue)
-                            .font(.system(size: 28))
-                    }
+        VStack(spacing: 10) {
+            TextField("Measurement Name", text: $newMeasurementName, prompt: Text("Measurement Name"))
+            HStack {
+                TextField("Measurement Value", text: $newMeasurementValue, prompt: Text("0.0"))
+                    .keyboardType(.decimalPad)
+                Spacer()
+                Button {
+                    createNewMeasurement()
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 28))
                 }
             }
         }
