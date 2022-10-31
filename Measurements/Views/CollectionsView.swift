@@ -19,10 +19,10 @@ struct CollectionsView: View {
 //    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.updatedAt, ascending: true)], predicate: )
 //    private var items: FetchedResults<Item>
 
-    @State private var navigationPath = [Collection]()
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack(path: $path) {
             List {
                 ForEach(collections) { collection in
                     NavigationLink(value: collection) {
@@ -44,8 +44,8 @@ struct CollectionsView: View {
             }
         }
         .onAppear() {
-            if let c = collections.first {
-                navigationPath.append(c)
+            if let collection = collections.first {
+                path.append(collection)
             }
         }
     }
@@ -69,7 +69,7 @@ struct CollectionsView: View {
 //        }
 
         DataController.shared.save()
-        navigationPath = [collection]
+        path.append(collection)
     }
 
     func deleteItems(at offsets: IndexSet) {
