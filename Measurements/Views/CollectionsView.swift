@@ -23,14 +23,17 @@ struct CollectionsView: View {
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            List(collections) { collection in
-                NavigationLink(value: collection) {
-                    HStack {
-                        Text(collection.displayName)
-                        Spacer()
-                        countImage(count: collection.itemCount)
+            List {
+                ForEach(collections) { collection in
+                    NavigationLink(value: collection) {
+                        HStack {
+                            Text(collection.displayName)
+                            Spacer()
+                            countImage(count: collection.itemCount)
+                        }
                     }
                 }
+                .onDelete(perform: deleteItems)
             }
             .addButton(action: newCollection, iconName: "folder.fill.badge.plus")
             .navigationTitle("Collections")
@@ -67,6 +70,13 @@ struct CollectionsView: View {
 
         DataController.shared.save()
         navigationPath = [collection]
+    }
+
+    func deleteItems(at offsets: IndexSet) {
+        withAnimation {
+            offsets.map { collections[$0] }.forEach(viewContext.delete)
+            DataController.shared.save()
+        }
     }
 }
 

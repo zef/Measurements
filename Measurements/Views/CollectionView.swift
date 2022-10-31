@@ -13,10 +13,16 @@ struct CollectionView: View {
     init(collection: Collection) {
         self.collection = collection
         self.collectionName = collection.name ?? ""
+        self.items = collection.itemList
+
+        if collectionName == "" {
+            editMode = true
+        }
     }
 
     @State var collection: Collection
     @State var collectionName: String
+    @State var items: [Item]
 
     @State var editMode = false
 
@@ -26,7 +32,7 @@ struct CollectionView: View {
             .sheet(isPresented: $editMode, onDismiss: updateTitle) {
                 editView
             }
-            .addButton(action: newItem, iconName: "plus")
+            .addButton(action: addItem, iconName: "plus")
             .navigationTitle(collectionName)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -78,35 +84,48 @@ struct CollectionView: View {
     }
 
     var collectionList: some View {
-        List(collection.itemList) { item in
-            Section(item.displayName) {
-                NavigationLink(destination: ItemView(item: item)) {
-                    VStack(spacing: 10) {
-                        ForEach(item.measurementList) { measurement in
-                            HStack {
-                                Text(measurement.displayValue)
-                                Spacer()
-                                if let name = measurement.name {
-                                    Text(name)
-                                        .foregroundColor(.gray)
+        List {
+            ForEach(items) { item in
+                Section(item.displayName) {
+                    NavigationLink(destination: ItemView(item: item)) {
+                        VStack(spacing: 10) {
+                            ForEach(item.measurementList) { measurement in
+                                HStack {
+                                    Text(measurement.displayValue)
+                                    Spacer()
+                                    if let name = measurement.name {
+                                        Text(name)
+                                            .foregroundColor(.gray)
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            .onDelete(perform: deleteItems)
         }
     }
 
+    func deleteItems(at offsets: IndexSet) {
+        withAnimation {
+            offsets.map { collection.itemList[$0] }.forEach(viewContext.delete)
+            DataController.shared.save()
+            items = collection.itemList
+        }
+    }
 
-    func newItem() {
+    func addItem() {
         let item = Item(context: viewContext)
+
+        // do I need both of these lines, or just one?
         collection.addToItems(item)
         item.collection = collection
+
         item.updateTimestamps()
         item.name = Date().formatted(date: .long, time: .shortened)
-//        print("Collection items: \(collection.itemList)")
         DataController.shared.save()
+        items = collection.itemList
     }
 
     func updateTitle() {
