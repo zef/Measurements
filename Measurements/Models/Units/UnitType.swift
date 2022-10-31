@@ -7,12 +7,11 @@ enum UnitType: String, CaseIterable, Identifiable {
     case volume
     case speed
     case temperature
-    case acceleration
     case angle
-    case area
-    case concentrationMass
-    case dispersion
     case duration
+    case area
+    case acceleration
+    case fuelEfficiency
     case electricCharge
     case electricCurrent
     case electricPotentialDifference
@@ -20,10 +19,11 @@ enum UnitType: String, CaseIterable, Identifiable {
     case energy
     case power
     case frequency
-    case fuelEfficiency
+    case pressure
+    case dispersion
     case illuminance
     case informationStorage
-    case pressure
+    case concentrationMass
 
     var id: String { rawValue }
 
