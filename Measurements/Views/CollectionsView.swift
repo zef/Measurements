@@ -16,9 +16,6 @@ struct CollectionsView: View {
         animation: .default)
     private var collections: FetchedResults<Collection>
 
-//    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.updatedAt, ascending: true)], predicate: )
-//    private var items: FetchedResults<Item>
-
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -64,7 +61,7 @@ struct CollectionsView: View {
         collection.updateTimestamps()
 
 //        if let collection = collections.first {
-//            collection.name = "Truck Bed"
+//            collection.name = "House"
 //            collection.updateTimestamps()
 //        }
 
