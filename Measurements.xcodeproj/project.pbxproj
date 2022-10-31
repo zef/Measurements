@@ -26,6 +26,7 @@
 		8D09124B290CDE7C00850332 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09123D290CDE7C00850332 /* ItemView.swift */; };
 		8D09124C290CDE7C00850332 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09123F290CDE7C00850332 /* String+.swift */; };
 		8D09124D290CDE7C00850332 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091240290CDE7C00850332 /* Color.swift */; };
+		8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		8D09123D290CDE7C00850332 /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		8D09123F290CDE7C00850332 /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		8D091240290CDE7C00850332 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				8D09123B290CDE7C00850332 /* CollectionView.swift */,
 				8D09123D290CDE7C00850332 /* ItemView.swift */,
 				8D09123C290CDE7C00850332 /* UnitSelectionView.swift */,
+				8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				8D09120B290CDE2900850332 /* DataController.swift in Sources */,
 				8D091241290CDE7C00850332 /* Models.swift in Sources */,
 				8D091248290CDE7C00850332 /* CollectionsView.swift in Sources */,
+				8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */,
 				8D091245290CDE7C00850332 /* Dimension.swift in Sources */,
 				8D09124D290CDE7C00850332 /* Color.swift in Sources */,
 				8D091249290CDE7C00850332 /* CollectionView.swift in Sources */,

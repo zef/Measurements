@@ -10,9 +10,74 @@ import SwiftUI
 struct CollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    init(collection: Collection) {
+        self.collection = collection
+        self.collectionName = collection.name ?? ""
+    }
+
     @State var collection: Collection
+    @State var collectionName: String
+
+    @State var editMode = false
 
     var body: some View {
+        collectionList
+            .listStyle(.plain)
+            .sheet(isPresented: $editMode, onDismiss: updateTitle) {
+                editView
+            }
+            .addButton(action: newItem, iconName: "plus")
+            .navigationTitle(collectionName)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                // Maybe edit the title inline?
+                //
+                //    ToolbarItem(placement: .principal) {
+                //        TextField("Collection Name", text: $collectionName, prompt: Text("Collection Name"))
+                //            .multilineTextAlignment(.center)
+                //            .padding(.top, 12)
+                //            .bold()
+                //    }
+                ToolbarItem() {
+                    Button(action: editCollection) {
+                        Image(systemName: "folder.fill.badge.gearshape")
+                    }
+                }
+
+            }
+    }
+
+    var editView: some View {
+        VStack(spacing: 20) {
+            HStack  {
+                Text("Edit Collection")
+                    .font(.system(.headline))
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Name")
+                    .font(.system(.callout))
+                TextField("Collection Name", text: $collectionName, prompt: Text("Collection Name"))
+                    .bold()
+                    .padding(10)
+                    .background(Color.contrastBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+
+            Spacer()
+
+            Button {
+                editMode = false
+            } label: {
+                Text("Done")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+    }
+
+    var collectionList: some View {
         List(collection.itemList) { item in
             Section(item.displayName) {
                 NavigationLink(destination: ItemView(item: item)) {
@@ -31,9 +96,6 @@ struct CollectionView: View {
                 }
             }
         }
-        .addButton(action: newItem, iconName: "plus")
-        .navigationTitle(collection.displayName)
-        .navigationBarTitleDisplayMode(.inline)
     }
 
 
@@ -46,26 +108,15 @@ struct CollectionView: View {
 //        print("Collection items: \(collection.itemList)")
         DataController.shared.save()
     }
-}
 
-extension View {
-    @ViewBuilder public func addButton(action: @escaping () -> Void, iconName: String) -> some View {
-        self.overlay(alignment: .bottomTrailing) {
-            Button(action: action) {
-                Image(systemName: iconName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
-            .frame(width: 34, height: 34)
-            .padding(14)
-            .overlay {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(.orange, lineWidth: 4)
-            }
-            .padding(20)
-        }
+    func updateTitle() {
+        collection.name = collectionName
+        DataController.shared.save()
     }
 
+    func editCollection() {
+        editMode = true
+    }
 }
 
 struct CollectionView_Previews: PreviewProvider {
@@ -80,8 +131,9 @@ struct CollectionView_Previews: PreviewProvider {
 //        item.value = 28
 
         preview.save()
-//        let collection = Collection()
-        
-        return CollectionView(collection: collection)
+
+        return NavigationStack {
+            CollectionView(collection: collection)
+        }
     }
 }

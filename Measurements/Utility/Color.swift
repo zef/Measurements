@@ -17,6 +17,10 @@ extension Color {
     return Color("Text")
   }
 
+  static var contrastBackground: Color {
+    return Color("contrastBackground")
+  }
+
   static var sae: Color {
     return Color("SAE")
   }

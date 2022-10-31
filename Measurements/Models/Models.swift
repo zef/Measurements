@@ -32,6 +32,10 @@ extension Collection {
             $0.sortDate < $1.sortDate
         }
     }
+
+    var itemCount: Int {
+        items?.count ?? 0
+    }
 }
 
 extension Item {
