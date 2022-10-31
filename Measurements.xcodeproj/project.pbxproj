@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D004B2629101ED9002B0CA0 /* OptionalBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D004B2529101ED9002B0CA0 /* OptionalBinding.swift */; };
 		8D091202290CDE2800850332 /* MeasurementsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091201290CDE2800850332 /* MeasurementsApp.swift */; };
 		8D091206290CDE2900850332 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D091205290CDE2900850332 /* Assets.xcassets */; };
 		8D091209290CDE2900850332 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D091208290CDE2900850332 /* Preview Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D004B2529101ED9002B0CA0 /* OptionalBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalBinding.swift; sourceTree = "<group>"; };
 		8D0911FE290CDE2800850332 /* Measurements.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Measurements.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D091201290CDE2800850332 /* MeasurementsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsApp.swift; sourceTree = "<group>"; };
 		8D091203290CDE2800850332 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,7 +131,6 @@
 				8D091231290CDE7C00850332 /* Models */,
 				8D09123E290CDE7C00850332 /* Utility */,
 				8D09120F290CDE2900850332 /* Info.plist */,
-				8D09120C290CDE2900850332 /* Measurements.xcdatamodeld */,
 				8D091207290CDE2900850332 /* Preview Content */,
 			);
 			path = Measurements;
@@ -164,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8D09120A290CDE2900850332 /* DataController.swift */,
+				8D09120C290CDE2900850332 /* Measurements.xcdatamodeld */,
 				8DE42A81290CE7C0002AE0EF /* Units */,
 				8D091232290CDE7C00850332 /* Models.swift */,
 				8D091237290CDE7C00850332 /* Settings.swift */,
@@ -188,6 +190,7 @@
 			children = (
 				8D09123F290CDE7C00850332 /* String+.swift */,
 				8D091240290CDE7C00850332 /* Color.swift */,
+				8D004B2529101ED9002B0CA0 /* OptionalBinding.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D09120B290CDE2900850332 /* DataController.swift in Sources */,
+				8D004B2629101ED9002B0CA0 /* OptionalBinding.swift in Sources */,
 				8D091241290CDE7C00850332 /* Models.swift in Sources */,
 				8D091248290CDE7C00850332 /* CollectionsView.swift in Sources */,
 				8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */,

@@ -13,16 +13,14 @@ struct CollectionView: View {
     init(collection: Collection) {
         self.collection = collection
         self.collectionName = collection.name ?? ""
-        self.items = collection.itemList
 
         if collectionName == "" {
             editMode = true
         }
     }
 
-    @State var collection: Collection
+    @ObservedObject var collection: Collection
     @State var collectionName: String
-    @State var items: [Item]
 
     @State var editMode = false
 
@@ -53,39 +51,9 @@ struct CollectionView: View {
             }
     }
 
-    var editView: some View {
-        VStack(spacing: 20) {
-            HStack  {
-                Text("Edit Collection")
-                    .font(.system(.headline))
-            }
-
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Name")
-                    .font(.system(.callout))
-                TextField("Collection Name", text: $collectionName, prompt: Text("Collection Name"))
-                    .bold()
-                    .padding(10)
-                    .background(Color.contrastBackground)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-
-            Spacer()
-
-            Button {
-                editMode = false
-            } label: {
-                Text("Done")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding()
-    }
-
     var collectionList: some View {
         List {
-            ForEach(items) { item in
+            ForEach(collection.itemList) { item in
                 Section(item.displayName) {
                     NavigationLink(destination: ItemView(item: item)) {
                         VStack(spacing: 10) {
@@ -107,25 +75,45 @@ struct CollectionView: View {
         }
     }
 
+    var editView: some View {
+        VStack(spacing: 20) {
+            HStack  {
+                Text("Edit Collection")
+                    .font(.system(.headline))
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Name").font(.system(.callout))
+                TextField("Collection Name", text: $collectionName, prompt: Text("Collection Name"))
+                    .textFieldStyle(CustomTextFieldStyle())
+            }
+
+            Spacer()
+
+            Button {
+                editMode = false
+            } label: {
+                Text("Done")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+    }
+
+
     func deleteItems(at offsets: IndexSet) {
         withAnimation {
             offsets.map { collection.itemList[$0] }.forEach(viewContext.delete)
             DataController.shared.save()
-            items = collection.itemList
         }
     }
 
     func addItem() {
         let item = Item(context: viewContext)
-
-        // do I need both of these lines, or just one?
-        collection.addToItems(item)
         item.collection = collection
-
         item.updateTimestamps()
-        item.name = Date().formatted(date: .long, time: .shortened)
         DataController.shared.save()
-        items = collection.itemList
     }
 
     func updateTitle() {

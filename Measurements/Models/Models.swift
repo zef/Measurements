@@ -50,7 +50,11 @@ extension Item {
 
 extension Measurement {
     var displayValue: String {
-        "\(value)"
+        if let unit {
+            return "\(value) \(unit)"
+        } else {
+            return String(value)
+        }
     }
 }
 

@@ -23,7 +23,7 @@ struct UnitSelectionView: View {
             Divider()
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: 4) {
-                    ForEach(selectedUnitType.dimensions) { unit in
+                    ForEach(selectedUnitType.dimensions, id: \.self) { unit in
                         Button {
                             if let unit = unit as? any SpecificUnit {
                                 selectedUnit = unit

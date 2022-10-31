@@ -8,29 +8,21 @@
 import SwiftUI
 
 struct ItemView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @ObservedObject var item: Item
-    @State var newDimensionValue: String = ""
+
+    @State var newMeasurementValue: String = ""
+    @State var newMeasurementName: String = ""
 
     @AppStorage(Settings.Key.lastUnitType.rawValue)
     var selectedUnitType: UnitType = .mass
     @State var selectedUnit: Dimension = UnitLength.inches
 
+
     var body: some View {
         VStack {
-            HStack {
-                TextField("New Dimension", text: $newDimensionValue)
-                    .keyboardType(.decimalPad)
-                Spacer()
-                Button {
-                    createNewMeasurement()
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 28))
-                }
-            }
-            .padding(20)
-
+            newMeasurementForm
             List(item.measurementList) { measurement in
                 HStack {
                     Text(measurement.displayValue)
@@ -41,20 +33,67 @@ struct ItemView: View {
                 }
             }
             UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)
-                .padding(8)
         }
-//            .foregroundColor(.gray)
         .navigationTitle(item.displayName)
+        .padding(8)
+
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                TextField("Item Name", text: Binding($item.name, ""), prompt: Text("Item Name"))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 12)
+                // centering the text in the field
+                // Would like a better way of doing this.
+                    .padding(.trailing, 35)
+                    .bold()
+            }
+
+        }
+    }
+
+    var newMeasurementForm: some View {
+        VStack {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Measurement Name").font(.system(.callout))
+                TextField("Measurement Name", text: $newMeasurementName, prompt: Text("Measurement Name"))
+            }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Measurement Value").font(.system(.callout))
+                HStack {
+                    TextField("Measurement Value", text: $newMeasurementValue, prompt: Text("0.0"))
+                        .keyboardType(.decimalPad)
+                    Spacer()
+                    Button {
+                        createNewMeasurement()
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.blue)
+                            .font(.system(size: 28))
+                    }
+                }
+            }
+        }
+        .textFieldStyle(CustomTextFieldStyle())
+        .padding(20)
     }
 
     func createNewMeasurement() {
-        guard let value = Double(newDimensionValue) else {
+        guard let value = Double(newMeasurementValue) else {
             print("could not create measurement, value is not a Double")
             return
         }
         print(value)
-//        let measurement = Measurement(value: value)
-//        item.measurements.append(measurement)
+
+        let measurement = Measurement(context: viewContext)
+        measurement.name = newMeasurementName
+        measurement.value = value
+        measurement.unit = selectedUnit.displayName
+        measurement.updateTimestamps()
+        measurement.item = item
+        DataController.shared.save()
+
+        newMeasurementName = ""
+        newMeasurementValue = ""
     }
 }
 

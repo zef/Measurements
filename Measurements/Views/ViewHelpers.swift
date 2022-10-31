@@ -24,4 +24,15 @@ extension View {
             .padding(20)
         }
     }
+
+}
+
+struct CustomTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .bold()
+            .padding(10)
+            .background(Color.contrastBackground)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
 }
