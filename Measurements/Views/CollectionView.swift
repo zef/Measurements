@@ -127,19 +127,8 @@ struct CollectionView: View {
 
 struct CollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        let preview = DataController.preview
-
-        let collection = Collection(context: preview.container.viewContext)
-        collection.name = "House Stuff"
-
-        let item = Item(context: preview.container.viewContext)
-        item.name = "Door"
-//        item.value = 28
-
-        preview.save()
-
         return NavigationStack {
-            CollectionView(collection: collection)
+//            CollectionView(collection: collection)
         }
     }
 }

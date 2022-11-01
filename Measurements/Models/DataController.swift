@@ -38,6 +38,10 @@ class DataController: ObservableObject {
         let collection = Collection(context: viewContext)
         collection.name = "House Stuff"
 
+        let item = Item(context: preview.container.viewContext)
+        item.name = "Door"
+        item.collection = collection
+
         result.save()
         return result
     }()

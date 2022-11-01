@@ -78,5 +78,6 @@ struct CollectionsView: View {
 struct CollectionsView_Previews: PreviewProvider {
     static var previews: some View {
         CollectionsView()
+            .environment(\.managedObjectContext, DataController.preview.container.viewContext)
     }
 }
