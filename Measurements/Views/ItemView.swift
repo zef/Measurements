@@ -23,14 +23,17 @@ struct ItemView: View {
     var body: some View {
         VStack {
             newMeasurementForm
-            List(item.measurementList) { measurement in
-                HStack {
-                    Text(measurement.displayValue)
-                    Spacer()
-                    if let name = measurement.name {
-                        Text(name)
+            List {
+                ForEach(item.measurementList) { measurement in
+                    HStack {
+                        Text(measurement.displayValue)
+                        Spacer()
+                        if let name = measurement.name {
+                            Text(name)
+                        }
                     }
                 }
+                .onDelete(perform: delete)
             }
             UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)
         }
@@ -41,10 +44,14 @@ struct ItemView: View {
                 TextField("Item Name", text: Binding($item.name, ""), prompt: Text("Item Name"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 12)
-                // centering the text in the field
-                // Would like a better way of doing this.
+                    // centering the text in the field
+                    // Would like a better way of doing this.
                     .padding(.trailing, 35)
                     .bold()
+                    .onChange(of: item.name) { newValue in
+                        DataController.shared.save()
+                    }
+                    // .onSubmit { }
             }
 
         }
@@ -87,6 +94,14 @@ struct ItemView: View {
         newMeasurementName = ""
         newMeasurementValue = ""
     }
+
+    func delete(at offsets: IndexSet) {
+        withAnimation {
+            offsets.map { item.measurementList[$0] }.forEach(viewContext.delete)
+            DataController.shared.save()
+        }
+    }
+
 }
 
 struct ItemView_Previews: PreviewProvider {
