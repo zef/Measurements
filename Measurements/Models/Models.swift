@@ -16,12 +16,28 @@ extension BaseEntity {
         updatedAt ?? Date()
     }
 
-    func updateTimestamps() {
-        updatedAt = Date()
+    private func updateTimestamps(date: Date = Date()) {
+        // if the last update was within the last second, return early.
+        if let updatedAt, updatedAt.timeIntervalSinceNow > -1 {
+            print("Timestamps already updated.")
+            return
+        }
+
+        updatedAt = date
 
         if createdAt == nil {
             createdAt = updatedAt
         }
+        parentObjects.forEach { $0.updateTimestamps(date: date) }
+    }
+
+    @objc var parentObjects: [BaseEntity] {
+        []
+    }
+
+    public override func willSave() {
+        print("will save. hasChanges? \(hasChanges)", self)
+        updateTimestamps()
     }
 }
 
@@ -36,9 +52,17 @@ extension Collection {
     var itemCount: Int {
         items?.count ?? 0
     }
+
+    public override func didSave() {
+        super.didSave()
+    }
 }
 
 extension Item {
+    override var parentObjects: [BaseEntity] {
+        [collection].compactMap { $0 }
+    }
+
     var measurementList: [Measurement] {
         let set = measurements as? Set<Measurement> ?? []
         return set.sorted {
@@ -49,6 +73,10 @@ extension Item {
 
 
 extension Measurement {
+    override var parentObjects: [BaseEntity] {
+        [item].compactMap { $0 }
+    }
+
     var displayValue: String {
         if let unit {
             return "\(value) \(unit)"

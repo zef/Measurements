@@ -81,7 +81,6 @@ struct ItemView: View {
         measurement.name = newMeasurementName
         measurement.value = value
         measurement.unit = selectedUnit.displayName
-        measurement.updateTimestamps()
         measurement.item = item
         DataController.shared.save()
 

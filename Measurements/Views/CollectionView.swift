@@ -112,7 +112,6 @@ struct CollectionView: View {
     func addItem() {
         let item = Item(context: viewContext)
         item.collection = collection
-        item.updateTimestamps()
         DataController.shared.save()
     }
 

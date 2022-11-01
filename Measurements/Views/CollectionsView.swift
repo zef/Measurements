@@ -58,11 +58,9 @@ struct CollectionsView: View {
 
     func newCollection() {
         let collection = Collection(context: viewContext)
-        collection.updateTimestamps()
 
 //        if let collection = collections.first {
 //            collection.name = "House"
-//            collection.updateTimestamps()
 //        }
 
         DataController.shared.save()
