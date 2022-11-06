@@ -12,7 +12,7 @@ struct CollectionsView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Collection.updatedAt, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Collection.updatedAt, ascending: false)],
         animation: .default)
     private var collections: FetchedResults<Collection>
 
@@ -36,14 +36,13 @@ struct CollectionsView: View {
             .navigationTitle("Collections")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Collection.self) { collection in
-
                 return CollectionView(collection: collection)
             }
         }
         .onAppear() {
-            if let collection = collections.first {
-                path.append(collection)
-            }
+//            if let collection = collections.first {
+//                path.append(collection)
+//            }
         }
     }
 
@@ -58,11 +57,6 @@ struct CollectionsView: View {
 
     func newCollection() {
         let collection = Collection(context: viewContext)
-
-//        if let collection = collections.first {
-//            collection.name = "House"
-//        }
-
         DataController.shared.save()
         path.append(collection)
     }

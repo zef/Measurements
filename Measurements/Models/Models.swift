@@ -17,7 +17,7 @@ extension BaseEntity {
     }
 
     private func updateTimestamps(date: Date = Date()) {
-        // if the last update was within the last second, return early.
+        // return early if the last update was within the last second
         if let updatedAt, updatedAt.timeIntervalSinceNow > -1 {
             print("Timestamps already updated.")
             return
@@ -36,7 +36,6 @@ extension BaseEntity {
     }
 
     public override func willSave() {
-        print("will save. hasChanges? \(hasChanges)", self)
         updateTimestamps()
     }
 }
@@ -70,7 +69,6 @@ extension Item {
         }
     }
 }
-
 
 extension Measurement {
     override var parentObjects: [BaseEntity] {

@@ -13,6 +13,7 @@ struct CollectionView: View {
     init(collection: Collection) {
         self.collection = collection
         self.collectionName = collection.name ?? ""
+        self.items = collection.itemList
 
         if collectionName == "" {
             editMode = true
@@ -21,6 +22,7 @@ struct CollectionView: View {
 
     @ObservedObject var collection: Collection
     @State var collectionName: String
+    @State var items: [Item]
 
     @State var editMode = false
 
@@ -72,6 +74,10 @@ struct CollectionView: View {
                 }
             }
             .onDelete(perform: deleteItems)
+        }
+        .onAppear {
+            print("List did appear")
+//            self.items = collection.itemList
         }
     }
 
