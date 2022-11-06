@@ -29,6 +29,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        let collections = DataController.shared.collections
 //        print(collections)
 
+        printSQLiteLocation()
+
         return true
     }
 
@@ -46,6 +48,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //            print(dimension.unitTypeName)
         }
     }
+
+    func printSQLiteLocation() {
+        let path = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+            .last?.absoluteString.replacingOccurrences(of: "file://", with: "").removingPercentEncoding
+        print("SQLite:")
+        print(path ?? "Not found")
+    }
+
 //
 //    func printCategories() {
 //        for category in Category.allCases {
