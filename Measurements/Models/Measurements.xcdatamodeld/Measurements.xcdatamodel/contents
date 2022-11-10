@@ -13,6 +13,7 @@
         <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Measurement" inverseName="item" inverseEntity="Measurement"/>
     </entity>
     <entity name="Measurement" representedClassName="Measurement" parentEntity="BaseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="measurements" inverseEntity="Item"/>
