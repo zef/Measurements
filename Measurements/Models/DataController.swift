@@ -61,6 +61,12 @@ class DataController: ObservableObject {
         m3.unit = .grams
         m3.item = item
 
+        let m4 = Measurement(context: viewContext)
+//        m3.name = "tare weight"
+        m4.value = 42
+        m4.unit = .liters
+        m4.item = item
+
         return result
     }()
 

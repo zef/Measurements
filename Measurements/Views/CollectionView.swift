@@ -36,7 +36,7 @@ struct CollectionView: View {
 
     var body: some View {
         collectionList
-            .listStyle(.plain)
+//            .listStyle(.plain)
             .sheet(isPresented: $editMode, onDismiss: updateTitle) {
                 editView
             }
@@ -66,16 +66,9 @@ struct CollectionView: View {
             ForEach(collection.itemList) { item in
                 Section(item.displayName) {
                     NavigationLink(destination: ItemView(item: item)) {
-                        VStack(spacing: 10) {
+                        VStack(alignment: .leading, spacing: 10) {
                             ForEach(item.measurementList) { measurement in
-                                HStack {
-                                    Text(measurement.displayValue)
-                                    Spacer()
-                                    if let name = measurement.name {
-                                        Text(name)
-                                            .foregroundColor(.gray)
-                                    }
-                                }
+                                MeasurementRowView(measurement: measurement)
                             }
                         }
                     }

@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+enum Icon: String {
+    case delete = "trash"
+
+    var image: Image {
+        Image(systemName: rawValue)
+    }
+
+    var filled: some View {
+        image.symbolVariant(.fill)
+    }
+}
+
 extension View {
     @ViewBuilder public func addButton(action: @escaping () -> Void, iconName: String) -> some View {
         self.overlay(alignment: .bottomTrailing) {

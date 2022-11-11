@@ -25,7 +25,7 @@ struct ItemView: View {
             newMeasurementForm
             List {
                 ForEach(item.measurementList) { measurement in
-                    row(for: measurement)
+                    MeasurementRowView(measurement: measurement)
                 }
                 .onDelete(perform: delete)
             }
@@ -46,31 +46,22 @@ struct ItemView: View {
                     }
                     // .onSubmit { }
             }
-
-        }
-    }
-
-    func row(for measurement: Measurement) -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                if let type = measurement.unit?.unitType {
-                    type.icon
-                        .foregroundColor(type.color)
-//                        .symbolVariant(.fill)
+            ToolbarItem {
+                Button {
+                    print("delete")
+                } label: {
+                    Icon.delete.image
                 }
-                Text(measurement.displayValue)
+
             }
-            if let name = measurement.name {
-                Text(name)
-                    .font(.subheadline)
-                    .foregroundColor(.lightText)
-            }
+
         }
     }
 
     var newMeasurementForm: some View {
         VStack(spacing: 10) {
             TextField("Measurement Name", text: $newMeasurementName, prompt: Text("Measurement Name"))
+                .autocapitalization(.none)
             HStack {
                 TextField("Measurement Value", text: $newMeasurementValue, prompt: Text("0.0"))
                     .keyboardType(.decimalPad)
