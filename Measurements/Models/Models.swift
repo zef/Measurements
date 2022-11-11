@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 extension BaseEntity {
     var displayName: String {
@@ -41,6 +42,11 @@ extension BaseEntity {
 }
 
 extension Collection {
+    static func all(in moc: NSManagedObjectContext) -> [Collection] {
+        let request: NSFetchRequest<Collection> = NSFetchRequest(entityName: "Collection")
+        return (try? moc.fetch(request)) ?? []
+    }
+
     var itemList: [Item] {
         let set = items as? Set<Item> ?? []
         return set.sorted {

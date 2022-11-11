@@ -42,11 +42,11 @@ class DataController: ObservableObject {
         item.name = "Door"
         item.collection = collection
 
-        let measurement = Measurement(context: viewContext)
-        measurement.name = "width"
-        measurement.value = 42
-        measurement.unit = .inches
-        measurement.item = item
+        let m1 = Measurement(context: viewContext)
+        m1.name = "width"
+        m1.value = 42
+        m1.unit = .inches
+        m1.item = item
 
         let m2 = Measurement(context: viewContext)
         m2.name = "height"

@@ -140,8 +140,10 @@ struct CollectionView: View {
 
 struct CollectionView_Previews: PreviewProvider {
     static var previews: some View {
+        let moc = DataController.preview.container.viewContext
+        let collection = Collection.all(in: moc)[0]
         return NavigationStack {
-//            CollectionView(collection: collection)
+            CollectionView(collection: collection)
         }
     }
 }

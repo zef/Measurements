@@ -39,11 +39,11 @@ struct CollectionsView: View {
                 return CollectionView(collection: collection)
             }
         }
-        .onAppear() {
+//        .onAppear() {
 //            if let collection = collections.first {
 //                path.append(collection)
 //            }
-        }
+//        }
     }
 
     func countImage(count: Int) -> Image {

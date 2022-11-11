@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -33,7 +32,6 @@ struct ItemView: View {
             UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)
         }
         .navigationTitle(item.displayName)
-        .padding(8)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 TextField("Item Name", text: Binding($item.name, ""), prompt: Text("Item Name"))
@@ -120,14 +118,12 @@ struct ItemView: View {
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         let moc = DataController.preview.container.viewContext
-        let request: NSFetchRequest<Collection> = NSFetchRequest(entityName: "Collection")
-        if let result = try? moc.fetch(request),
-           let item = result.first?.itemList.first {
+        let collections = Collection.all(in: moc)
+        if let item = collections.first?.itemList.first {
             ItemView(item: item)
                 .environment(\.managedObjectContext, moc)
         } else {
             Text("Failed to make preview.")
         }
-
     }
 }
