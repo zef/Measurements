@@ -24,21 +24,91 @@ extension Dimension {
             }
         }
 
+        var unitType: UnitType {
+            for t in UnitType.allCases {
+                if unit.isKind(of: t.type) {
+                    return t
+                }
+            }
+            assertionFailure("Expected to find matching UnitType!")
+            return .length
+        }
+
+        var isUS: Bool {
+            switch self {
+            case .inches, .feet, .yards, .miles,
+                 .squareInches, .squareFeet, .squareYards, .squareMiles, .acres,
+                 .cubicInches, .cubicFeet, .cubicYards, .cubicMiles, .acreFeet,
+                 .bushels, .teaspoons, .tablespoons, .fluidOunces, .cups,
+                 .pints, .quarts, .gallons,
+                 .ounces, .pounds, .shortTons,
+                 .milesPerHour, .milesPerGallon,
+                 .fahrenheit,
+                 .inchesOfMercury, .poundsForcePerSquareInch:
+                return true
+            default:
+                return false
+            }
+        }
+
+        var isUK: Bool {
+            if isImperial {
+                return true
+            }
+
+            switch self {
+            case .stones:
+                return true
+            default:
+                return false
+            }
+        }
+
+        // the odd UK variants, not the entire "imperial" system
         var isImperial: Bool {
-            rawValue.contains("imperial")
+            rawValue.lowercased().contains("imperial")
+        }
+
+        var isCommon: Bool { !isObscure }
+
+        var isObscure: Bool {
+            let exactMatches: [Self] = [
+                .ares, .terahertz, .millihertz,
+                .nanograms, .nanohertz, .nanowatts,
+                .nibbles, .scandinavianMiles,
+                .centigrams, .centiliters,
+            ]
+            return [
+                exactMatches.contains(self),
+                self.matches("mega", except: [.megabits, .megabytes, .megahertz, .megaohms]),
+                self.matches("pico"),
+                self.matches("nano", except: [.nanometers, .nanoseconds]),
+                self.matches("micro", except: [.microseconds, .microvolts]),
+                self.matches("bibytes"),
+                self.matches("bibits"),
+                self.matches("yotta"),
+                self.matches("zetta"),
+                self.matches("hecto"),
+                self.matches("dec"),
+            ].contains(true)
+        }
+
+        func matches(_ string: String, except exceptions: [Self] = []) -> Bool {
+            if exceptions.contains(self) { return true }
+            return rawValue.lowercased().contains(string)
         }
 
         // Acceleration
-        case metersPerSecondSquared
         case gravity
+        case metersPerSecondSquared
 
         // Angle
         case degrees
+        case radians
+        case revolutions
         case arcMinutes
         case arcSeconds
-        case radians
         case gradians
-        case revolutions
 
         // Area
         case squareMegameters
@@ -64,65 +134,65 @@ extension Dimension {
         case partsPerMillion
 
         // Duration
-        case hours
-        case minutes
         case seconds
+        case minutes
+        case hours
         case milliseconds
         case microseconds
         case nanoseconds
         case picoseconds
 
         // Electric Charge
-        case  coulombs
-        case  megaampereHours
-        case  kiloampereHours
         case  ampereHours
-        case  milliampereHours
+        case  coulombs
         case  microampereHours
+        case  milliampereHours
+        case  kiloampereHours
+        case  megaampereHours
 
         // Electric Current
-        case megaamperes
-        case kiloamperes
         case amperes
-        case milliamperes
         case microamperes
+        case milliamperes
+        case kiloamperes
+        case megaamperes
 
         // Electric Potential Difference
-        case megavolts
-        case kilovolts
         case volts
-        case millivolts
         case microvolts
+        case millivolts
+        case kilovolts
+        case megavolts
 
         // Electric Resistance
-        case megaohms
-        case kiloohms
         case ohms
-        case milliohms
         case microohms
+        case milliohms
+        case kiloohms
+        case megaohms
 
         // Energy
-        case kilojoules
         case joules
-        case kilocalories
         case calories
         case kilowattHours
+        case kilojoules
+        case kilocalories
 
         // Frequency
-        case terahertz
+        case hertz
         case gigahertz
         case megahertz
         case kilohertz
-        case hertz
+        case terahertz
         case millihertz
         case microhertz
         case nanohertz
         case framesPerSecond
 
         // Fuel Efficiency
+        case milesPerGallon
         case litersPer100Kilometers
         case milesPerImperialGallon
-        case milesPerGallon
 
         // Information Storage
         case bytes
@@ -220,14 +290,14 @@ extension Dimension {
         case horsepower
 
         // Pressure
+        case bars
+        case millibars
         case newtonsPerMetersSquared
         case gigapascals
         case megapascals
         case kilopascals
         case hectopascals
         case inchesOfMercury
-        case bars
-        case millibars
         case millimetersOfMercury
         case poundsForcePerSquareInch
 
@@ -243,6 +313,20 @@ extension Dimension {
         case fahrenheit
 
         // Volume
+        case teaspoons
+        case tablespoons
+        case fluidOunces
+        case cups
+        case pints
+        case quarts
+        case gallons
+        case imperialTeaspoons
+        case imperialTablespoons
+        case imperialFluidOunces
+        case imperialPints
+        case imperialQuarts
+        case imperialGallons
+        case metricCups
         case megaliters
         case kiloliters
         case liters
@@ -260,20 +344,6 @@ extension Dimension {
         case cubicMiles
         case acreFeet
         case bushels
-        case teaspoons
-        case tablespoons
-        case fluidOunces
-        case cups
-        case pints
-        case quarts
-        case gallons
-        case imperialTeaspoons
-        case imperialTablespoons
-        case imperialFluidOunces
-        case imperialPints
-        case imperialQuarts
-        case imperialGallons
-        case metricCups
 
         var unit: Foundation.Dimension {
             switch self {
