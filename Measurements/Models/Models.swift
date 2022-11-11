@@ -20,7 +20,6 @@ extension BaseEntity {
     private func updateTimestamps(date: Date = Date()) {
         // return early if the last update was within the last second
         if let updatedAt, updatedAt.timeIntervalSinceNow > -1 {
-            print("Timestamps already updated.")
             return
         }
 

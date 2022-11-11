@@ -11,4 +11,12 @@ struct Settings {
     enum Key: String {
         case lastUnitType
     }
+
+    static var includeImperialUnits: Bool {
+        false
+    }
+
+    static var usOnly: Bool {
+        false
+    }
 }

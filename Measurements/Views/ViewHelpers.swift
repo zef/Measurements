@@ -19,7 +19,7 @@ extension View {
             .padding(14)
             .overlay {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(.orange, lineWidth: 4)
+                    .stroke(Color.accentColor, lineWidth: 4)
             }
             .padding(20)
         }

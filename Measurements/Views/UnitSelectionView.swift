@@ -14,6 +14,20 @@ struct UnitSelectionView: View {
 
     func filteredDimensions(for type: UnitType) -> [Dimension.Case] {
         var dimensions = type.dimensions
+
+        if !Settings.includeImperialUnits {
+            dimensions.removeAll(where: \.isImperial)
+        }
+
+        if Settings.usOnly {
+            let usDimensions = dimensions.filter(\.isUS)
+            if !usDimensions.isEmpty {
+                dimensions = usDimensions
+            }
+        }
+
+        dimensions.removeAll(where: \.isObscure)
+
         return dimensions
     }
 
@@ -33,11 +47,11 @@ struct UnitSelectionView: View {
                         Button {
                             selectedUnit = dimension
                         } label: {
-                            VStack {
+                            VStack(spacing: 8) {
                                 Text(dimension.unit.symbol)
-                                    .font(.system(size: 26)).bold()
+                                    .font(.system(size: 22)).bold()
                                 Text(dimension.description)
-                                    .font(.system(size: 14)).bold()
+                                    .font(.system(size: 12)).bold()
                             }
                             .selectable(isSelected: selectedUnit == dimension)
 //                                .overlay {

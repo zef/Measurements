@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -25,13 +26,7 @@ struct ItemView: View {
             newMeasurementForm
             List {
                 ForEach(item.measurementList) { measurement in
-                    HStack {
-                        Text(measurement.displayValue)
-                        Spacer()
-                        if let name = measurement.name {
-                            Text(name)
-                        }
-                    }
+                    row(for: measurement)
                 }
                 .onDelete(perform: delete)
             }
@@ -54,6 +49,24 @@ struct ItemView: View {
                     // .onSubmit { }
             }
 
+        }
+    }
+
+    func row(for measurement: Measurement) -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                if let type = measurement.unit?.unitType {
+                    type.icon
+                        .foregroundColor(type.color)
+//                        .symbolVariant(.fill)
+                }
+                Text(measurement.displayValue)
+            }
+            if let name = measurement.name {
+                Text(name)
+                    .font(.subheadline)
+                    .foregroundColor(.lightText)
+            }
         }
     }
 
@@ -106,9 +119,15 @@ struct ItemView: View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("todo")
-//        if let object = Collection.kitchen.objects.first {
-//            ItemView(object: object)
-//        }
+        let moc = DataController.preview.container.viewContext
+        let request: NSFetchRequest<Collection> = NSFetchRequest(entityName: "Collection")
+        if let result = try? moc.fetch(request),
+           let item = result.first?.itemList.first {
+            ItemView(item: item)
+                .environment(\.managedObjectContext, moc)
+        } else {
+            Text("Failed to make preview.")
+        }
+
     }
 }

@@ -9,12 +9,16 @@ import SwiftUI
 
 extension Color {
 
-  static var accent: Color {
-    return Color("Accent")
+//  static var accent: Color {
+//    return Color("Accent")
+//  }
+//
+  static var text: Color {
+    return Color("text")
   }
 
-  static var text: Color {
-    return Color("Text")
+  static var lightText: Color {
+    return Color("lightText")
   }
 
   static var contrastBackground: Color {

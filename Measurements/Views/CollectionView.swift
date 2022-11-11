@@ -11,11 +11,11 @@ struct CollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @ObservedObject var collection: Collection
-    @State var collectionName: String = ""
+    @State var collectionName: String
 //    @FetchRequest var items: FetchedResults<Item>
 //    @State var items: [Item]
 
-    @State var editMode = false
+    @State var editMode: Bool
 
     init(collection: Collection) {
         self.collection = collection
@@ -25,10 +25,12 @@ struct CollectionView: View {
 //            predicate: NSPredicate(format: "collection = %@", collection)
 //        )
 
-        self.collectionName = collection.name ?? ""
-
-        if collectionName == "" {
-            editMode = true
+        if let name = collection.name {
+            self.collectionName = name
+            self.editMode = false
+        } else {
+            self.collectionName = ""
+            self.editMode = true
         }
     }
 
@@ -94,6 +96,9 @@ struct CollectionView: View {
                 Text("Name").font(.system(.callout))
                 TextField("Collection Name", text: $collectionName, prompt: Text("Collection Name"))
                     .textFieldStyle(CustomTextFieldStyle())
+                    .onSubmit {
+                        editMode = false
+                    }
             }
 
             Spacer()

@@ -40,7 +40,12 @@ extension Measurement {
 
     var displayValue: String {
         if let unit {
-            return "\(value) \(unit.description)"
+            let formatter = MeasurementFormatter()
+            formatter.unitOptions = .providedUnit
+            formatter.unitStyle = .long
+            let measurement = Foundation.Measurement(value: value, unit: unit.unit)
+            return formatter.string(from: measurement)
+//            return "\(value) \(unit.description)"
         } else {
             return String(value)
         }

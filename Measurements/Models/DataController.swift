@@ -38,11 +38,29 @@ class DataController: ObservableObject {
         let collection = Collection(context: viewContext)
         collection.name = "House Stuff"
 
-        let item = Item(context: preview.container.viewContext)
+        let item = Item(context: viewContext)
         item.name = "Door"
         item.collection = collection
 
-        result.save()
+        let measurement = Measurement(context: viewContext)
+        measurement.name = "width"
+        measurement.value = 42
+        measurement.unit = .inches
+        measurement.item = item
+
+        let m2 = Measurement(context: viewContext)
+        m2.name = "height"
+        m2.value = 49.5
+        m2.unit = .inches
+        m2.item = item
+
+
+        let m3 = Measurement(context: viewContext)
+        m3.name = "tare weight"
+        m3.value = 338
+        m3.unit = .grams
+        m3.item = item
+
         return result
     }()
 

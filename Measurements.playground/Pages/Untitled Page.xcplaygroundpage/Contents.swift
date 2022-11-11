@@ -14,6 +14,7 @@ measurement + measurement
 measurement.converted(to: pounds)
 measurement.formatted()
 
+Measurement(value: 1, unit: UnitElectricPotentialDifference.kilovolts).converted(to: .megavolts)
 
 let feet = UnitLength.feet
 let cm = UnitLength.centimeters
@@ -40,6 +41,14 @@ let tbspImp = UnitVolume.imperialTablespoons
 
 let volTest = Measurement(value: 10, unit: tbsp)
 volTest.converted(to: tbspImp)
+
+
+let u1 = UnitArea.acres
+let u2 = UnitArea.ares
+
+let toConvert = Measurement(value: 1, unit: u1)
+toConvert.converted(to: u2)
+
 
 //
 let s = "NSUnitInformationStorage"

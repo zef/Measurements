@@ -10,6 +10,10 @@ import SwiftUI
 
 extension UnitType {
 
+    var icon: Image {
+        Image(systemName: iconName)
+    }
+
     var iconName: String {
         switch self {
         case .acceleration: return "hare" // TODO: Better
