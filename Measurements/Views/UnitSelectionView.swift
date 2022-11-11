@@ -9,7 +9,13 @@ import SwiftUI
 
 struct UnitSelectionView: View {
     @Binding var selectedUnitType: UnitType
-    @Binding var selectedUnit: Dimension
+    @Binding var selectedUnit: Dimension.Case
+
+
+    func filteredDimensions(for type: UnitType) -> [Dimension.Case] {
+        var dimensions = type.dimensions
+        return dimensions
+    }
 
     var body: some View {
         VStack {
@@ -23,15 +29,17 @@ struct UnitSelectionView: View {
             Divider()
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: 4) {
-                    ForEach(selectedUnitType.dimensions, id: \.self) { unit in
+                    ForEach(filteredDimensions(for: selectedUnitType)) { dimension in
                         Button {
-                            if let unit = unit as? any SpecificUnit {
-                                selectedUnit = unit
-                            }
+                            selectedUnit = dimension
                         } label: {
-                            Text(unit.symbol)
-                                .font(.system(size: 26)).bold()
-                                .selectable(selectedUnit.id == unit.symbol)
+                            VStack {
+                                Text(dimension.unit.symbol)
+                                    .font(.system(size: 26)).bold()
+                                Text(dimension.description)
+                                    .font(.system(size: 14)).bold()
+                            }
+                            .selectable(isSelected: selectedUnit == dimension)
 //                                .overlay {
 //                                    RoundedRectangle(cornerRadius: 12)
 //                                        .stroke(Color.metric, lineWidth: 4)
@@ -48,7 +56,7 @@ struct UnitSelectionView: View {
     func typeButton(type: UnitType) -> some View {
         Button {
             selectedUnitType = type
-            selectedUnit = type.dimensions.first ?? UnitLength.inches
+            selectedUnit = type.dimensions.first ?? .defaultCase
         } label: {
             VStack {
                 Image(systemName: type.iconName)
@@ -58,13 +66,14 @@ struct UnitSelectionView: View {
                 Text(type.description)
                     .font(.system(size: 14)).bold()
             }
-            .selectable(type == selectedUnitType)
+//            .symbolVariant(.fill)
+            .selectable(isSelected: type == selectedUnitType)
         }
     }
 }
 
 extension View {
-    func selectable(_ isSelected: Bool) -> some View {
+    func selectable(isSelected: Bool) -> some View {
         return self
             .padding(.vertical, 16)
             .padding(.horizontal, 22)
@@ -77,7 +86,7 @@ extension View {
 
 struct UnitSelectionView_Previews: PreviewProvider {
     @State static var selectedUnitType: UnitType = .mass
-    @State static var selectedUnit: Dimension = UnitLength.inches
+    @State static var selectedUnit: Dimension.Case = .defaultCase
 
     static var previews: some View {
         UnitSelectionView(selectedUnitType: $selectedUnitType, selectedUnit: $selectedUnit)

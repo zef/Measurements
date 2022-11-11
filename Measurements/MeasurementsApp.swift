@@ -24,17 +24,23 @@ struct MeasurementsApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 //        printCategories()
-//        checkDimensions()
+        checkDimensions()
 
 //        let collections = DataController.shared.collections
 //        print(collections)
 
-        printSQLiteLocation()
+//        printSQLiteLocation()
 
         return true
     }
 
     func checkDimensions() {
+        for dimension in Dimension.Case.allCases {
+            print(dimension.description)
+        }
+    }
+
+    func checkTypes() {
         for dimension in UnitType.allCases.flatMap(\.dimensions) {
 //            let type = dimension.unitType
 //            print("\(String(describing: type))")
@@ -42,10 +48,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             let formatter = MeasurementFormatter()
             formatter.unitStyle = .long
             formatter.unitOptions = .providedUnit
-            let measurement = Foundation.Measurement(value: 12, unit: dimension)
-            let string = formatter.string(from: measurement)
-            print(string)
+
+//            let measurement = Foundation.Measurement(value: 12, unit: dimension)
+//            let string = formatter.string(from: measurement)
+//            print(string)
 //            print(dimension.unitTypeName)
+            print(dimension.description)
         }
     }
 

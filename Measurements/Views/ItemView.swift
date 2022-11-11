@@ -17,8 +17,8 @@ struct ItemView: View {
 
     @AppStorage(Settings.Key.lastUnitType.rawValue)
     var selectedUnitType: UnitType = .mass
-    @State var selectedUnit: Dimension = UnitLength.inches
 
+    @State var selectedUnit: Dimension.Case = .defaultCase
 
     var body: some View {
         VStack {
@@ -87,7 +87,7 @@ struct ItemView: View {
         let measurement = Measurement(context: viewContext)
         measurement.name = newMeasurementName
         measurement.value = value
-        measurement.unit = selectedUnit.displayName
+        measurement.unit = selectedUnit
         measurement.item = item
         DataController.shared.save()
 

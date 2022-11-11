@@ -10,21 +10,27 @@ import SwiftUI
 struct CollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    @ObservedObject var collection: Collection
+    @State var collectionName: String = ""
+//    @FetchRequest var items: FetchedResults<Item>
+//    @State var items: [Item]
+
+    @State var editMode = false
+
     init(collection: Collection) {
         self.collection = collection
+//        self.items = collection.itemList
+//        _items = FetchRequest<Item>(
+//            sortDescriptors: [NSSortDescriptor(keyPath: \Collection.updatedAt, ascending: true)],
+//            predicate: NSPredicate(format: "collection = %@", collection)
+//        )
+
         self.collectionName = collection.name ?? ""
-        self.items = collection.itemList
 
         if collectionName == "" {
             editMode = true
         }
     }
-
-    @ObservedObject var collection: Collection
-    @State var collectionName: String
-    @State var items: [Item]
-
-    @State var editMode = false
 
     var body: some View {
         collectionList
@@ -74,10 +80,6 @@ struct CollectionView: View {
                 }
             }
             .onDelete(perform: deleteItems)
-        }
-        .onAppear {
-            print("List did appear")
-//            self.items = collection.itemList
         }
     }
 

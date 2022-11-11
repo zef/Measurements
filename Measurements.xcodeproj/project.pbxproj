@@ -27,6 +27,10 @@
 		8D09124B290CDE7C00850332 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09123D290CDE7C00850332 /* ItemView.swift */; };
 		8D09124C290CDE7C00850332 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D09123F290CDE7C00850332 /* String+.swift */; };
 		8D09124D290CDE7C00850332 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D091240290CDE7C00850332 /* Color.swift */; };
+		8D45ACC4291DB1CA0004411F /* UnitType+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC3291DB1CA0004411F /* UnitType+Style.swift */; };
+		8D45ACC6291DB23F0004411F /* UnitType+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC5291DB23F0004411F /* UnitType+Dimension.swift */; };
+		8D45ACC9291DF1C50004411F /* Measurement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC7291DF1C50004411F /* Measurement+CoreDataClass.swift */; };
+		8D45ACCA291DF1C50004411F /* Measurement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC8291DF1C50004411F /* Measurement+CoreDataProperties.swift */; };
 		8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +77,10 @@
 		8D09123D290CDE7C00850332 /* ItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		8D09123F290CDE7C00850332 /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		8D091240290CDE7C00850332 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		8D45ACC3291DB1CA0004411F /* UnitType+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitType+Style.swift"; sourceTree = "<group>"; };
+		8D45ACC5291DB23F0004411F /* UnitType+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitType+Dimension.swift"; sourceTree = "<group>"; };
+		8D45ACC7291DF1C50004411F /* Measurement+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8D45ACC8291DF1C50004411F /* Measurement+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +177,8 @@
 				8DE42A81290CE7C0002AE0EF /* Units */,
 				8D091232290CDE7C00850332 /* Models.swift */,
 				8D091237290CDE7C00850332 /* Settings.swift */,
+				8D45ACC7291DF1C50004411F /* Measurement+CoreDataClass.swift */,
+				8D45ACC8291DF1C50004411F /* Measurement+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,6 +210,8 @@
 			children = (
 				8D091234290CDE7C00850332 /* Unit+.swift */,
 				8D091235290CDE7C00850332 /* UnitType.swift */,
+				8D45ACC5291DB23F0004411F /* UnitType+Dimension.swift */,
+				8D45ACC3291DB1CA0004411F /* UnitType+Style.swift */,
 				8D091236290CDE7C00850332 /* Dimension.swift */,
 			);
 			path = Units;
@@ -337,17 +349,21 @@
 			files = (
 				8D09120B290CDE2900850332 /* DataController.swift in Sources */,
 				8D004B2629101ED9002B0CA0 /* OptionalBinding.swift in Sources */,
+				8D45ACC6291DB23F0004411F /* UnitType+Dimension.swift in Sources */,
 				8D091241290CDE7C00850332 /* Models.swift in Sources */,
 				8D091248290CDE7C00850332 /* CollectionsView.swift in Sources */,
 				8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */,
 				8D091245290CDE7C00850332 /* Dimension.swift in Sources */,
 				8D09124D290CDE7C00850332 /* Color.swift in Sources */,
+				8D45ACC9291DF1C50004411F /* Measurement+CoreDataClass.swift in Sources */,
 				8D091249290CDE7C00850332 /* CollectionView.swift in Sources */,
 				8D091246290CDE7C00850332 /* Settings.swift in Sources */,
 				8D09124B290CDE7C00850332 /* ItemView.swift in Sources */,
+				8D45ACCA291DF1C50004411F /* Measurement+CoreDataProperties.swift in Sources */,
 				8D091244290CDE7C00850332 /* UnitType.swift in Sources */,
 				8D09124C290CDE7C00850332 /* String+.swift in Sources */,
 				8D091243290CDE7C00850332 /* Unit+.swift in Sources */,
+				8D45ACC4291DB1CA0004411F /* UnitType+Style.swift in Sources */,
 				8D09124A290CDE7C00850332 /* UnitSelectionView.swift in Sources */,
 				8D09120E290CDE2900850332 /* Measurements.xcdatamodeld in Sources */,
 				8D091202290CDE2800850332 /* MeasurementsApp.swift in Sources */,

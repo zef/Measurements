@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension BaseEntity {
     var displayName: String {
@@ -68,19 +69,14 @@ extension Item {
             $0.sortDate < $1.sortDate
         }
     }
-}
 
-extension Measurement {
-    override var parentObjects: [BaseEntity] {
-        [item].compactMap { $0 }
-    }
-
-    var displayValue: String {
-        if let unit {
-            return "\(value) \(unit)"
-        } else {
-            return String(value)
-        }
+    @MainActor static func fetchRequest(for collection: Collection) -> FetchRequest<Item> {
+        return FetchRequest<Item>(
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \Collection.updatedAt, ascending: true)
+            ],
+            predicate: NSPredicate(format: "collection = %@", collection)
+        )
     }
 }
 
