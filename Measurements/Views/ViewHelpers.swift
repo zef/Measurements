@@ -9,6 +9,7 @@ import SwiftUI
 
 enum Icon: String {
     case delete = "trash"
+    case keyboardDown = "keyboard.chevron.compact.down"
 
     var image: Image {
         Image(systemName: rawValue)
