@@ -32,6 +32,8 @@
 		8D45ACC9291DF1C50004411F /* Measurement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC7291DF1C50004411F /* Measurement+CoreDataClass.swift */; };
 		8D45ACCA291DF1C50004411F /* Measurement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACC8291DF1C50004411F /* Measurement+CoreDataProperties.swift */; };
 		8D45ACCC291EF4F90004411F /* MeasurementRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */; };
+		8D7FF5C92926FB8400749EC6 /* CaseIterable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */; };
+		8D7FF5CB2927001D00749EC6 /* RoundSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FF5CA2927001D00749EC6 /* RoundSelectorView.swift */; };
 		8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,8 @@
 		8D45ACC7291DF1C50004411F /* Measurement+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8D45ACC8291DF1C50004411F /* Measurement+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Measurement+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementRowView.swift; sourceTree = "<group>"; };
+		8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaseIterable+.swift"; sourceTree = "<group>"; };
+		8D7FF5CA2927001D00749EC6 /* RoundSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSelectorView.swift; sourceTree = "<group>"; };
 		8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +195,7 @@
 				8D09123A290CDE7C00850332 /* CollectionsView.swift */,
 				8D09123B290CDE7C00850332 /* CollectionView.swift */,
 				8D09123D290CDE7C00850332 /* ItemView.swift */,
+				8D7FF5CA2927001D00749EC6 /* RoundSelectorView.swift */,
 				8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */,
 				8D09123C290CDE7C00850332 /* UnitSelectionView.swift */,
 				8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */,
@@ -204,6 +209,7 @@
 				8D09123F290CDE7C00850332 /* String+.swift */,
 				8D091240290CDE7C00850332 /* Color.swift */,
 				8D004B2529101ED9002B0CA0 /* OptionalBinding.swift */,
+				8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -359,12 +365,14 @@
 				8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */,
 				8D091245290CDE7C00850332 /* Dimension.swift in Sources */,
 				8D09124D290CDE7C00850332 /* Color.swift in Sources */,
+				8D7FF5C92926FB8400749EC6 /* CaseIterable+.swift in Sources */,
 				8D45ACC9291DF1C50004411F /* Measurement+CoreDataClass.swift in Sources */,
 				8D091249290CDE7C00850332 /* CollectionView.swift in Sources */,
 				8D091246290CDE7C00850332 /* Settings.swift in Sources */,
 				8D09124B290CDE7C00850332 /* ItemView.swift in Sources */,
 				8D45ACCA291DF1C50004411F /* Measurement+CoreDataProperties.swift in Sources */,
 				8D091244290CDE7C00850332 /* UnitType.swift in Sources */,
+				8D7FF5CB2927001D00749EC6 /* RoundSelectorView.swift in Sources */,
 				8D09124C290CDE7C00850332 /* String+.swift in Sources */,
 				8D091243290CDE7C00850332 /* Unit+.swift in Sources */,
 				8D45ACC4291DB1CA0004411F /* UnitType+Style.swift in Sources */,
