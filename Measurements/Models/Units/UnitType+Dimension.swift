@@ -90,6 +90,8 @@ extension Dimension {
                 self.matches("zetta"),
                 self.matches("hecto"),
                 self.matches("dec"),
+                self.matches("pascal"),
+                self.matches("mercury"),
             ].contains(true)
         }
 
@@ -290,6 +292,7 @@ extension Dimension {
         case horsepower
 
         // Pressure
+        case poundsForcePerSquareInch
         case bars
         case millibars
         case newtonsPerMetersSquared
@@ -299,7 +302,6 @@ extension Dimension {
         case hectopascals
         case inchesOfMercury
         case millimetersOfMercury
-        case poundsForcePerSquareInch
 
         // Speed
         case metersPerSecond

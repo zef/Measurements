@@ -4,18 +4,18 @@ import SwiftUI
 enum UnitType: String, CaseIterable, Identifiable, CustomStringConvertible {
     case length
     case mass
+    case area
     case volume
     case speed
     case temperature
     case angle
     case duration
-    case area
-    case acceleration
     case fuelEfficiency
     case electricCharge
     case electricCurrent
     case electricPotentialDifference
     case electricResistance
+    case acceleration
     case energy
     case power
     case frequency
