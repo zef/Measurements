@@ -67,3 +67,49 @@ if let data = try? NSKeyedArchiver.archivedData(withRootObject: width, requiring
 //    let newWidth = try? NSKeyedUnarchiver.unarchivedObject(ofClass: Measurement, from: data)
 }
 
+
+enum Division: Int, CaseIterable, CustomStringConvertible {
+    case whole = 0
+    case half
+    case quarter
+    case eighth
+    case sixteenth
+    case thirtysecond
+
+    var count: Int {
+        NSDecimalNumber(decimal: pow(2, order)).intValue
+    }
+
+    var order: Int {
+        rawValue
+    }
+
+    var description: String {
+        return "1/\(count)"
+    }
+
+    init(index: Int, maxUnit: Division = .sixteenth) {
+        let count = index
+        var match: Division?
+        let cases = Self.allCases.filter { $0.order < maxUnit.order }
+        for (index, division) in cases.reversed().enumerated() {
+            let divisor = NSDecimalNumber(decimal: pow(2, index + 1)).intValue
+            if (count % divisor) == 0 {
+                match = division
+            }
+        }
+        self = match ?? maxUnit
+    }
+}
+
+for index in 0...16 {
+//     half
+//    print(index+1, index % 8 == 0)
+//     half
+    print(index, Division(index: index), "\n")
+}
+Int(truncating: NSDecimalNumber(decimal: pow(2, 4)))
+NSDecimalNumber(decimal: pow(2, 4)).intValue
+
+
+
