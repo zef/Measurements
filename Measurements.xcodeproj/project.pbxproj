@@ -34,6 +34,8 @@
 		8D45ACCC291EF4F90004411F /* MeasurementRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */; };
 		8D7FF5C92926FB8400749EC6 /* CaseIterable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */; };
 		8D7FF5CB2927001D00749EC6 /* RoundSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FF5CA2927001D00749EC6 /* RoundSelectorView.swift */; };
+		8D8EA36C292EC49A00FC3B2E /* FractionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8EA36B292EC49A00FC3B2E /* FractionSelectionView.swift */; };
+		8DC04FB1292C88E5003B6038 /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC04FB0292C88E5003B6038 /* Optional+.swift */; };
 		8DE42A83290F7EC7002AE0EF /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,8 @@
 		8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementRowView.swift; sourceTree = "<group>"; };
 		8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaseIterable+.swift"; sourceTree = "<group>"; };
 		8D7FF5CA2927001D00749EC6 /* RoundSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSelectorView.swift; sourceTree = "<group>"; };
+		8D8EA36B292EC49A00FC3B2E /* FractionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionSelectionView.swift; sourceTree = "<group>"; };
+		8DC04FB0292C88E5003B6038 /* Optional+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+.swift"; sourceTree = "<group>"; };
 		8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +203,7 @@
 				8D45ACCB291EF4F90004411F /* MeasurementRowView.swift */,
 				8D09123C290CDE7C00850332 /* UnitSelectionView.swift */,
 				8DE42A82290F7EC7002AE0EF /* ViewHelpers.swift */,
+				8D8EA36B292EC49A00FC3B2E /* FractionSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				8D09123F290CDE7C00850332 /* String+.swift */,
 				8D091240290CDE7C00850332 /* Color.swift */,
 				8D004B2529101ED9002B0CA0 /* OptionalBinding.swift */,
+				8DC04FB0292C88E5003B6038 /* Optional+.swift */,
 				8D7FF5C82926FB8400749EC6 /* CaseIterable+.swift */,
 			);
 			path = Utility;
@@ -358,6 +364,7 @@
 			files = (
 				8D09120B290CDE2900850332 /* DataController.swift in Sources */,
 				8D004B2629101ED9002B0CA0 /* OptionalBinding.swift in Sources */,
+				8D8EA36C292EC49A00FC3B2E /* FractionSelectionView.swift in Sources */,
 				8D45ACC6291DB23F0004411F /* UnitType+Dimension.swift in Sources */,
 				8D091241290CDE7C00850332 /* Models.swift in Sources */,
 				8D091248290CDE7C00850332 /* CollectionsView.swift in Sources */,
@@ -375,6 +382,7 @@
 				8D7FF5CB2927001D00749EC6 /* RoundSelectorView.swift in Sources */,
 				8D09124C290CDE7C00850332 /* String+.swift in Sources */,
 				8D091243290CDE7C00850332 /* Unit+.swift in Sources */,
+				8DC04FB1292C88E5003B6038 /* Optional+.swift in Sources */,
 				8D45ACC4291DB1CA0004411F /* UnitType+Style.swift in Sources */,
 				8D09124A290CDE7C00850332 /* UnitSelectionView.swift in Sources */,
 				8D09120E290CDE2900850332 /* Measurements.xcdatamodeld in Sources */,

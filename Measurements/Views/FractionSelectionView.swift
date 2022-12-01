@@ -59,7 +59,13 @@ struct FractionSelectionView: View {
         }
 
         var width: CGFloat {
-            return CGFloat(maxUnit.order - divison.order + 1)
+//            switch divison {
+//            case .whole, .half: return 5
+//            case .quarter: return 4
+//            case .eighth: return 3
+//            default: return 2
+//            }
+            return max(CGFloat(5 - divison.order + 1), 1)
         }
 
         var height: CGFloat {
@@ -76,10 +82,11 @@ struct FractionSelectionView: View {
     }
 
     @State var division = Marker.Division.thirtySecond
-    @State var dragPosition: CGFloat = 32
     @State private var markerData: [MarkerData] = []
+    @State var dragPosition: CGFloat = 3
     @State var selectedMarker = Marker(count: 0, maxUnit: .whole)
 
+    private let rulerPadding: CGFloat = 60
 
     var body: some View {
         VStack {
@@ -92,23 +99,30 @@ struct FractionSelectionView: View {
             .padding(.horizontal, 50)
             .padding(.vertical, 80)
 
-            rulerView
-                .padding(.horizontal, 40)
-            VStack {
-                Rectangle()
-                    .frame(width: 4, height: 40)
-                    .foregroundColor(.red)
-                Text(selectedMarker.description)
-                    .font(.custom("Courier New", fixedSize: 26))
-                    .bold()
+            ZStack {
+                VStack(spacing: 2) {
+                    Text(selectedMarker.description)
+                        .font(.custom("Courier New", fixedSize: 26))
+                        .bold()
+                    Rectangle()
+                        .frame(width: min(selectedMarker.width, 2), height: 120)
+                        .foregroundColor(.red)
+                }
+                .position(x: dragPosition, y: 30)
+                .frame(height: 120)
+
+                rulerView
+//                    .background(.yellow)
             }
-            .position(x: dragPosition+30-4, y: 40)
+            .frame(width: UIScreen.main.bounds.width - rulerPadding)
+            .padding(.top, 60)
+
+            Spacer()
         }
     }
 
     var rulerView: some View {
         HStack(alignment: .bottom, spacing: 0) {
-            Spacer()
             ForEach(0...division.count, id: \.self) { index in
                 let marker = Marker(count: index, maxUnit: division)
                 //                    Text("\(marker.height)")
@@ -116,6 +130,15 @@ struct FractionSelectionView: View {
                     .frame(width: marker.width, height: marker.height)
 //                    .frame(height: marker.height)
                     .foregroundColor(.black)
+                    .onTapGesture {
+                        if let item = markerData.first(where: { $0.index == marker.count }) {
+                            setMarkerPosition(
+                                marker: marker,
+                                position: item.bounds.midX
+                            )
+                        }
+
+                    }
                     .background() {
                         GeometryReader { geometry in
                             Rectangle()
@@ -125,13 +148,15 @@ struct FractionSelectionView: View {
                         }
 
                     }
-                Spacer()
+                if index < division.count {
+                    Spacer()
+                }
             }
         }
-        .frame(maxWidth: .infinity)
+//        .frame(maxWidth: .infinity)
         .onPreferenceChange(MarkerPreferenceKey.self) { value in
             markerData = value
-            print("new values", markerData)
+            print("new values", markerData.count)
         }
         .gesture(drag)
         .coordinateSpace(name: "RulerSpace")
@@ -139,14 +164,18 @@ struct FractionSelectionView: View {
 
     var drag: some Gesture {
         DragGesture().onChanged({ value in
-//            print("value \(value.location)")
             if let item = markerData.first(where: { $0.bounds.contains(value.location) }) {
-                dragPosition = item.bounds.midX
-                selectedMarker = Marker(count: item.index, maxUnit: division)
-                print("intersection", item)
+                setMarkerPosition(
+                    marker: Marker(count: item.index, maxUnit: division),
+                    position: item.bounds.midX
+                )
             }
-
         })
+    }
+
+    func setMarkerPosition(marker: Marker, position: CGFloat) {
+        dragPosition = position
+        selectedMarker = marker
     }
 }
 
