@@ -38,6 +38,10 @@ extension Measurement {
         [item].compactMap { $0 }
     }
 
+//    var valueString: String {
+//        return value.formatted(.number)
+//    }
+
     var displayValue: String {
         if let unit {
             let formatter = MeasurementFormatter()

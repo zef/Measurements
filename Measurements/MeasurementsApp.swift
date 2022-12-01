@@ -15,6 +15,7 @@ struct MeasurementsApp: App {
 
     var body: some Scene {
         WindowGroup {
+//            FractionSelectionView()
             CollectionsView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }

@@ -10,25 +10,14 @@ import SwiftUI
 import CoreData
 
 extension BaseEntity {
-    var displayName: String {
-        name ?? createdAt?.formatted(date: .numeric, time: .omitted) ?? ""
-    }
-
-    var sortDate: Date {
-        updatedAt ?? Date()
-    }
-
     private func updateTimestamps(date: Date = Date()) {
-        // return early if the last update was within the last second
-        if let updatedAt, updatedAt.timeIntervalSinceNow > -1 {
+        // return early if the last update just happened
+        if let updatedAt, updatedAt.timeIntervalSinceNow > -0.5 {
             return
         }
 
         updatedAt = date
-
-        if createdAt == nil {
-            createdAt = updatedAt
-        }
+        createdAt = createdAt ?? updatedAt
         parentObjects.forEach { $0.updateTimestamps(date: date) }
     }
 
@@ -38,6 +27,14 @@ extension BaseEntity {
 
     public override func willSave() {
         updateTimestamps()
+    }
+
+    var displayName: String {
+        name ?? createdAt?.formatted(date: .numeric, time: .omitted) ?? ""
+    }
+
+    var sortDate: Date {
+        updatedAt ?? Date()
     }
 }
 

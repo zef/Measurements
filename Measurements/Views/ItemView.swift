@@ -11,13 +11,18 @@ struct ItemView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @ObservedObject var item: Item
-    @State var displayForm = false
+    @State var editingMeasurement: Measurement?
 
     var body: some View {
         list
             .overlay(alignment: .bottom) {
-                if displayForm {
-                    MeasurementForm(item: item)
+                if editingMeasurement.isSet {
+                    VStack {
+                        Text(editingMeasurement.unsafelyUnwrapped.displayName)
+                        MeasurementForm(measurement: editingMeasurement.unsafelyUnwrapped,binding: $editingMeasurement)?.onAppear() {
+                            print("new form made")
+                        }
+                    }
                 }
             }
         
@@ -51,17 +56,34 @@ struct ItemView: View {
             List {
                 Section {
                     ForEach(item.measurementList) { measurement in
-                        MeasurementRowView(measurement: measurement)
+                        Button {
+                            print("changing measurement")
+                            self.editingMeasurement = measurement
+                        } label: {
+                            MeasurementRowView(measurement: measurement)
+                        }
+
                     }
                     .onDelete(perform: delete)
                 } footer: {
                     VStack {
                         Button("New Measurement") {
-                            displayForm = true
+                            let measurement = Measurement(context: viewContext)
+                            measurement.item = item
+                            self.editingMeasurement = measurement
                         }
                         .padding(.top, 20)
                         .frame(maxWidth: .infinity)
                         .buttonStyle(.borderedProminent)
+
+                        NavigationLink("Test Round") {
+                            RoundSelectorView()
+                        }
+                        .padding(10)
+                        NavigationLink("Test Fractions") {
+                            FractionSelectionView()
+                        }
+                        .padding(10)
 
                         if let updatedAt = item.updatedAt {
                             Text("Updated on \(updatedAt.formatted(date: .numeric, time: .shortened))")
@@ -90,28 +112,53 @@ struct MeasurementForm: View {
         case value
     }
 
-    @Environment(\.managedObjectContext) private var viewContext
+    init?(measurement: Measurement, binding: Binding<Measurement?>) {
+        self.measurementBinding = binding
 
-    @ObservedObject var item: Item
+//        guard let measurement = binding.wrappedValue else { return nil }
+        self.measurement = measurement
 
-    @State var newMeasurementValue: String = ""
-    @State var newMeasurementName: String = ""
+        self.newName = measurement.name ?? ""
+        self.newValue = measurement.value.formatted(.number)
+        print("setting up for", measurement.name ?? "NONE")
+
+        self.selectedUnit = measurement.unit ?? .defaultCase
+        self.selectedUnitType = selectedUnit.unitType
+    }
+
+    var measurementBinding: Binding<Measurement?>
+
+    @ObservedObject var measurement: Measurement
+
+    @State var newName: String
+    @State var newValue: String
 
     @AppStorage(Settings.Key.lastUnitType.rawValue)
-    var selectedUnitType: UnitType = .mass
-    @State var selectedUnit: Dimension.Case = .defaultCase
+    var selectedUnitType: UnitType = .length
+    @State var selectedUnit: Dimension.Case
 
     @FocusState private var focusedField: Field?
+
+//    var isInserted: String {
+//        if let v = measurementBinding.wrappedValue {
+//            return v.isUpdated ? "YES" : "NO"
+//        } else {
+//            return "NONE"
+//        }
+//    }
+
     var body: some View {
         VStack(spacing: 10) {
-            TextField("Measurement Name", text: $newMeasurementName, prompt: Text("Measurement Name"))
+//            Text("form ID: \(String)")
+            Text("Name value: \(newName)")
+            TextField("Measurement Name", text: $newName, prompt: Text("Measurement Name"))
                 .autocapitalization(.none)
                 .focused($focusedField, equals: .name)
                 .onSubmit {
                     focusedField = .value
                 }
             HStack {
-                TextField("Measurement Value", text: $newMeasurementValue, prompt: Text("0.0"))
+                TextField("Measurement Value", text: $newValue, prompt: Text("0.0"))
                     .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .value)
                     .onSubmit {
@@ -154,21 +201,20 @@ struct MeasurementForm: View {
     }
 
     func saveMeasurement() {
-        guard let value = Double(newMeasurementValue) else {
+        guard let value = Double(newValue) else {
             print("could not create measurement, value is not a Double")
             return
         }
-        print(value)
+        guard let measurement = measurementBinding.wrappedValue else { return }
 
-        let measurement = Measurement(context: viewContext)
-        measurement.name = newMeasurementName
+        measurement.name = newName
         measurement.value = value
         measurement.unit = selectedUnit
-        measurement.item = item
         DataController.shared.save()
 
-        newMeasurementName = ""
-        newMeasurementValue = ""
+        newName = ""
+        newValue = ""
+        measurementBinding.wrappedValue = nil
     }
 
 }

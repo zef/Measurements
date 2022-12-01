@@ -11,7 +11,6 @@ struct UnitSelectionView: View {
     @Binding var selectedUnitType: UnitType
     @Binding var selectedUnit: Dimension.Case
 
-
     func filteredDimensions(for type: UnitType) -> [Dimension.Case] {
         var dimensions = type.dimensions
 

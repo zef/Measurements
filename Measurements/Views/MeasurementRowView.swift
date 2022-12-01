@@ -20,6 +20,7 @@ struct MeasurementRowView: View {
             }
             VStack(alignment: .leading) {
                 Text(measurement.displayValue)
+                    .foregroundColor(.text)
                 if let name = measurement.name, !name.isEmpty {
                     Text(name)
                         .font(.subheadline)
