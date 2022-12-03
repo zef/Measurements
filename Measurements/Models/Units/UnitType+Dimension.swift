@@ -310,9 +310,9 @@ extension Dimension {
         case knots
 
         // Temperature
-        case kelvin
-        case celsius
         case fahrenheit
+        case celsius
+        case kelvin
 
         // Volume
         case teaspoons
